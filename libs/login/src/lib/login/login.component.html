@@ -1,0 +1,52 @@
+<div class="login-container">
+  <div class="login-card">
+    
+    <h2>Bienvenido</h2>
+    <p>Iniciar sesión en Doctocliq</p>
+    <div class="logo">
+      <img src="/logo.png" alt="Doctocliq Logo" width="120" />
+    </div>
+    <form autocomplete="off" (ngSubmit)="loginWithDb()">
+      <div class="form-group">
+       
+        <input
+          [(ngModel)]="model.username"
+          name="username"
+          type="text"
+          placeholder="Ingrese su usuario"
+          pInputText
+          class="w-full"
+          style="padding: 1rem"
+        />
+      </div>
+      
+      <div class="form-group mt-2">
+        
+        <input
+          [(ngModel)]="model.password"
+          name="password"
+          type="password"
+          placeholder="Ingrese su contraseña"
+          pInputText
+          class="w-full"
+          style="padding: 1rem"
+        />
+      </div>
+     <div class="form-group mt-2 text-center">
+      <p-button 
+        type="submit"
+        label="Iniciar Sesión" 
+        icon="pi pi-sign-in" 
+        class="p-button-rounded p-button-success" 
+      >
+      </p-button>
+     </div>
+    
+    </form>
+
+    
+
+  </div>
+
+  <div class="login-banner"></div>
+</div>

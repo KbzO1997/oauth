@@ -1,0 +1,29 @@
+{
+  "name": "cita-info",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/cita-info/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/cita-info/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/cita-info/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/cita-info/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

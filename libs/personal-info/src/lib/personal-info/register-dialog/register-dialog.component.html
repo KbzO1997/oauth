@@ -1,0 +1,197 @@
+<p-toast />
+<form #formulario="ngForm" class="card p-fluid mt-2" autocomplete="off">
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="usuario.persona.nombres"
+        name="nombres"
+        type="text"
+        placeholder="Nombres"
+        required
+        #nombres="ngModel"
+        (keypress)="util.textStringScape($event)"
+      />
+      <div *ngIf="nombres.invalid && nombres.touched" class="p-error">
+        Nombres es requerido.
+      </div>
+    </div>
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="usuario.persona.primerApellido"
+        name="primerApellido"
+        type="text"
+        placeholder="Primer Apellido"
+        required
+        #primerApellido="ngModel"
+        (keypress)="util.textStringNotScape($event)"
+      />
+      <div
+        *ngIf="primerApellido.invalid && primerApellido.touched"
+        class="p-error"
+      >
+        Primer Apellido es requerido.
+      </div>
+    </div>
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="usuario.persona.segundoApellido"
+        name="segundoApellido"
+        type="text"
+        placeholder="Segundo Apellido"
+        required
+        #segundoApellido="ngModel"
+        (keypress)="util.textStringNotScape($event)"
+      />
+      <div
+        *ngIf="segundoApellido.invalid && segundoApellido.touched"
+        class="p-error"
+      >
+        Segundo Apellido es requerido.
+      </div>
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="usuario.persona.cedula"
+        name="cedula"
+        type="text"
+        placeholder="Cédula"
+        required
+        maxlength="10"
+        #cedula="ngModel"
+        (keypress)="util.textNumber($event)"
+      />
+      <div *ngIf="cedula.invalid && cedula.touched" class="p-error">
+        Cédula es requerido.
+      </div>
+    </div>
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="usuario.persona.telefono"
+        name="telefono"
+        type="text"
+        placeholder="Teléfono"
+        required
+        maxlength="10"
+        #telefono="ngModel"
+        (keypress)="util.textNumber($event)"
+      />
+      <div *ngIf="telefono.invalid && telefono.touched" class="p-error">
+        Télefono es requerido.
+      </div>
+    </div>
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="usuario.persona.email"
+        name="email"
+        type="text"
+        placeholder="Email"
+        required
+        #email="ngModel"
+      />
+      <div *ngIf="email.invalid && email.touched" class="p-error">
+        Email es requerido.
+      </div>
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="usuario.persona.contacto"
+        name="contacto"
+        placeholder="En caso de emergencia contactar al Telef."
+        type="text"
+        required
+        #contacto="ngModel"
+      />
+      <div *ngIf="contacto.invalid && contacto.touched" class="p-error">
+        Contacto es requerido.
+      </div>
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <textarea
+        rows="3"
+        cols="10"
+        [(ngModel)]="usuario.persona.direccion"
+        name="direccion"
+        placeholder="Dirección"
+        pInputTextarea
+        required
+        #direccion="ngModel"
+      ></textarea>
+      <div *ngIf="direccion.invalid && direccion.touched" class="p-error">
+        Dirección es requerido.
+      </div>
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <p-dropdown
+        [options]="itemsRoles"
+        optionLabel="name"
+        optionValue="name"
+        [(ngModel)]="usuario.rol"
+        placeholder="Seleccione el rol"
+        required
+        #rol="ngModel"
+        [style]="{ display: 'flex' }"
+        appendTo="body"
+        [ngModelOptions]="{ standalone: true }"
+        (onChange)="onRolChange($event.value)"
+      ></p-dropdown>
+    </div>
+    <div class="field col" *ngIf="usuario.rol !== 'PACIENTE'">
+      <input
+        pInputText
+        [(ngModel)]="usuario.username"
+        name="username"
+        type="text"
+        placeholder="Usuario"
+        required
+        #username="ngModel"
+        (keypress)="util.textStringNumber($event)"
+      />
+      <div *ngIf="username.invalid && username.touched" class="p-error">
+        Usuario es requerido.
+      </div>
+    </div>
+    <div class="field col" *ngIf="usuario.rol !== 'PACIENTE'">
+      <input
+        pInputText
+        [(ngModel)]="usuario.contrasenia"
+        name="contrasenia"
+        type="text"
+        placeholder="Contraseña"
+        required
+        #contrasenia="ngModel"
+        (keypress)="util.textNotSpace($event)"
+      />
+      <div *ngIf="contrasenia.invalid && contrasenia.touched" class="p-error">
+        Contraseña es requerido.
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-content-center">
+    <p-button
+      icon="pi pi-user"
+      [rounded]="true"
+      severity="success"
+      [disabled]="formulario.invalid"
+      (click)="btnEnvRequest()"
+    />
+  </div>
+</form>

@@ -1,0 +1,29 @@
+{
+  "name": "personal-info",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/personal-info/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": ["type:libs", "scope:core"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/personal-info/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/personal-info/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/personal-info/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

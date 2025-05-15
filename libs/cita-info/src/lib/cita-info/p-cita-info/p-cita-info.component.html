@@ -1,0 +1,134 @@
+<div class="col-12 md:col-12">
+  <div class="card">
+    <p-table
+      #dt
+      dataKey="id"
+      styleClass="p-datatable-gridlines"
+      responsiveLayout="scroll"
+      [value]="list"
+      [rows]="5"
+      [rowHover]="true"
+      [paginator]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [globalFilterFields]="[
+        'nombres',
+        'primerApellido',
+        'segundoApellido',
+        'estado'
+      ]"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas."
+    >
+      <ng-template pTemplate="caption">
+        <div
+          class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+        >
+          <p-button
+            label="Registrar Nueva Cita"
+            icon="pi pi pi-book"
+            severity="info"
+            class="mr-2"
+            (onClick)="btnOpenModal()"
+          />
+          <span class="block mt-2 md:mt-0 p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="util.onGlobalFilter(dt, $event)"
+              placeholder="Buscar..."
+              class="w-full sm:w-auto"
+            />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr class="bg-primary text-white">
+          <th>Cancelar</th>
+          <th>Examinar</th>
+          <th>Tratamiento</th>
+          <th>Médico</th>
+          <th>Paciente</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Motivo</th>
+          <th>Costo</th>
+          <th>Pagado</th>
+          <th>Estado</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-model>
+        <tr>
+          <td class="text-center">
+            <p-button
+              *ngIf="model.estado === 'Asignado' " 
+              icon="pi pi-times"
+              [rounded]="true"
+              [text]="true"
+              [raised]="true"
+              severity="danger"
+              (onClick)="btnEnvEditRequest(model.id_cita)"
+            />
+          </td>
+          
+          <td>            
+            <p-button    
+              *ngIf="model.estado === 'Asignado' "          
+              icon="pi pi-eye"             
+              [rounded]="true"
+              [text]="true"
+              [raised]="true"
+              severity="primary"
+              (onClick)="btnRedirectVisualizar(model.idCita)" 
+            />
+          </td>
+          <td>{{ model.tratamiento.nombre }}</td>
+          <td>
+            {{ model.doctor.persona.nombres }}
+            {{ model.doctor.persona.primerApellido }}
+            {{ model.doctor.persona.segundoApellido }}
+          </td>
+          <td>
+            {{ model.paciente.persona.nombres }}
+            {{ model.paciente.persona.primerApellido }}
+            {{ model.paciente.persona.segundoApellido }}
+          </td>
+
+          <td>{{ model.fecha }}</td>
+          <td>{{ model.hora }}</td>
+          <td>{{ model.motivoCita }}</td>
+          <td>{{ model.costo  | currency:'USD' }}</td>
+          <td>{{ model.valor_pago  | currency:'USD' }}</td>
+          <td>
+            <p-tag 
+            [value]="model.estado" 
+            [severity]="model.estado === 'Asignado' ? 'info' : model.estado === 'Finalizada' ? 'success' : 'warning'">
+          </p-tag>
+          </td>
+          
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog
+  [closable]="true"
+  [(visible)]="dialog"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{ width: '45vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+>
+  <ng-template pTemplate="header">
+    <i class="pi pi-user-plus" style="margin-right: 0.5rem"></i>
+    Crear Cita.
+  </ng-template>
+  <app-cita-dialog
+    #registerCitaDialog
+    (registroExitoso)="dialog = false"
+  ></app-cita-dialog>
+</p-dialog>

@@ -1,0 +1,197 @@
+<div class="col-12 md:col-12 card  mt-2">
+    <div class="flex  mb-3 justify-content-center mt-2">
+        <i class="pi pi-users text-cyan-500 text-xl mr-2"></i
+        ><span class="text-500 font-medium">Registar información del paciente.</span>
+    </div>
+    <p-steps [model]="items" [readonly]="true"></p-steps>
+    <div [ngSwitch]="activeStepIndex">
+      <div *ngSwitchCase="0">
+        <div class="field col mt-2">
+            <input
+              pInputText
+              [(ngModel)]="model.persona.nombres"
+              name="nombres"
+              type="text"
+              placeholder="Nombres"
+              required
+              #nombres="ngModel"
+              class="w-full"
+              (keypress)="util.textStringScape($event)"
+            />
+            <div *ngIf="nombres.invalid && nombres.touched" class="p-error">
+              Nombres es requerido.
+            </div>
+          </div>
+          <div class="field col">
+            <input
+              pInputText
+              [(ngModel)]="model.persona.primerApellido"
+              name="primerApellido"
+              type="text"
+              placeholder="Primer Apellido"
+              required
+              #primerApellido="ngModel"
+              class="w-full"
+              (keypress)="util.textStringNotScape($event)"
+            />
+            <div
+              *ngIf="primerApellido.invalid && primerApellido.touched"
+              class="p-error"
+            >
+              Primer Apellido es requerido.
+            </div>
+          </div>
+          <div class="field col">
+            <input
+              pInputText
+              [(ngModel)]="model.persona.segundoApellido"
+              name="segundoApellido"
+              type="text"
+              placeholder="Segundo Apellido"
+              required
+              #segundoApellido="ngModel"
+              class="w-full"
+              (keypress)="util.textStringNotScape($event)"
+            />
+            <div
+              *ngIf="segundoApellido.invalid && segundoApellido.touched"
+              class="p-error"
+            >
+              Segundo Apellido es requerido.
+            </div>
+          </div>
+          <div class="field col">
+            <input
+              pInputText
+              [(ngModel)]="model.persona.cedula"
+              name="cedula"
+              type="text"
+              placeholder="Cédula"
+              required
+              maxlength="10"
+              #cedula="ngModel"
+              class="w-full"
+              (keypress)="util.textNumber($event)"
+            />
+            <div *ngIf="cedula.invalid && cedula.touched" class="p-error">
+              Cédula es requerido.
+            </div>
+          </div>
+      </div>
+      <div *ngSwitchCase="1">
+        <div class="field col">
+            <input
+              pInputText
+              [(ngModel)]="model.persona.telefono"
+              name="telefono"
+              type="text"
+              placeholder="Teléfono"
+              required
+              maxlength="10"
+              #telefono="ngModel"
+              class="w-full"
+              (keypress)="util.textNumber($event)"
+            />
+            <div *ngIf="telefono.invalid && telefono.touched" class="p-error">
+              Télefono es requerido.
+            </div>
+          </div>
+          <div class="field col">
+            <input
+              pInputText
+              [(ngModel)]="model.persona.email"
+              name="email"
+              type="text"
+              placeholder="Email"
+              required
+              class="w-full"
+              #email="ngModel"
+            />
+            <div *ngIf="email.invalid && email.touched" class="p-error">
+              Email es requerido.
+            </div>
+          </div>
+          <div class="field col">
+            <input
+              pInputText
+              [(ngModel)]="model.persona.contacto"
+              name="contacto"
+              placeholder="En caso de emergencia contactar al Telef."
+              type="text"
+              required
+              class="w-full"
+              #contacto="ngModel"
+            />
+            <div *ngIf="contacto.invalid && contacto.touched" class="p-error">
+              Contacto es requerido.
+            </div>
+          </div>
+      </div>
+      <div *ngSwitchCase="2">
+        <div class="field col">
+            <textarea
+              rows="3"
+              cols="10"
+              [(ngModel)]="model.persona.direccion"
+              name="direccion"
+              placeholder="Dirección"
+              pInputTextarea
+              required
+              #direccion="ngModel"
+              class="w-full"
+            ></textarea>
+            <div *ngIf="direccion.invalid && direccion.touched" class="p-error">
+              Dirección es requerido.
+            </div>
+          </div>
+          <div class="flex ">
+            <p-button
+                icon="pi pi-user"
+                [rounded]="true"
+                severity="success"
+                [disabled]="formulario.invalid"
+                (click)="btnEnvRequest()"
+            />
+          </div>
+      </div>
+    </div>
+    <div class="buttons flex justify-content-center">
+        <p-button
+            type="button"
+            icon="pi pi-arrow-left"
+            [rounded]="true"
+            severity="info"
+            [disabled]="activeStepIndex === 0"
+            (click)="prevStep()"
+        />
+
+        <p-button
+            type="button"
+            icon="pi pi-arrow-right"
+            [rounded]="true"
+            severity="info"
+            [disabled]="activeStepIndex === items.length - 1"
+            (click)="nextStep()"
+        /> 
+    </div>
+    
+</div>
+
+
+nextStep() {
+  if (this.activeStepIndex < this.items!.length - 1) {
+    this.activeStepIndex++;
+  }
+}
+
+prevStep() {
+  if (this.activeStepIndex > 0) {
+    this.activeStepIndex--;
+  }
+}
+
+this.items = [
+{ label: 'Datos Personales' },
+{ label: 'Datos de Contacto' },
+{ label: 'Datos de Ubicación' }
+];

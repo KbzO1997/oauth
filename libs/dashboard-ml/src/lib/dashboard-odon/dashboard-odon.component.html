@@ -1,0 +1,69 @@
+<style>
+  .p-card {
+  margin-bottom: 20px;
+}
+
+.p-grid {
+  margin-top: 20px;
+}
+
+.p-col-12 p-md-4, .p-col-12 p-md-6 {
+  margin-bottom: 20px;
+}
+</style>
+<div class="p-grid p-fluid">
+  <!-- Tarjetas de KPI -->
+  <div class="p-col-12 p-md-4">
+    <p-card header="Pacientes Activos">
+      <h2>{{ pacientesActivos }}</h2>
+    </p-card>
+  </div>
+  <div class="p-col-12 p-md-4">
+    <p-card header="Citas Programadas">
+      <h2>{{ citasProgramadas }}</h2>
+    </p-card>
+  </div>
+  <div class="p-col-12 p-md-4">
+    <p-card header="Ingresos Totales">
+      <h2>${{ ingresosTotales }}</h2>
+    </p-card>
+  </div>
+
+  <!-- Gráfico de Citas por Especialidad -->
+  <div class="p-col-12 p-md-6">
+    <p-card header="Citas por Especialidad">
+      <p-chart type="pie" [data]="citasPorEspecialidad"></p-chart>
+    </p-card>
+  </div>
+
+  <!-- Gráfico de Ingresos Mensuales -->
+  <div class="p-col-12 p-md-6">
+    <p-card header="Ingresos Mensuales">
+      <p-chart type="line" [data]="ingresosMensuales"></p-chart>
+    </p-card>
+  </div>
+
+  <!-- Tabla de Citas -->
+  <div class="p-col-12">
+    <p-card header="Citas Programadas">
+      <p-table [value]="citas" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Paciente</th>
+            <th>Fecha</th>
+            <th>Doctor</th>
+            <th>Especialidad</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cita>
+          <tr>
+            <td>{{ cita.paciente }}</td>
+            <td>{{ cita.fecha | date: 'short' }}</td>
+            <td>{{ cita.doctor }}</td>
+            <td>{{ cita.especialidad }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>

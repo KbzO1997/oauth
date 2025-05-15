@@ -1,0 +1,151 @@
+<form #formulario="ngForm" class="card p-fluid mt-2" autocomplete="off">
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <p-dropdown
+        [options]="items"
+        optionLabel="nombre"
+        optionValue="idTratamiento"
+        [(ngModel)]="model.id_tratamiento"
+        placeholder="Seleccione Tratamiento"
+        required
+        #idTratamiento="ngModel"
+        [style]="{ display: 'flex' }"
+        appendTo="body"
+        [ngModelOptions]="{ standalone: true }"
+        (onChange)="onMethodChange($event.value)"
+      ></p-dropdown>
+    </div>
+
+    <div class="field col">
+      <p-dropdown
+        [options]="itemsDoc"
+        optionLabel="nombreCompleto"
+        optionValue="idDoctor"
+        [(ngModel)]="model.id_doctor"
+        placeholder="Seleccione Médico"
+        required
+        #idDoctor="ngModel"
+        [style]="{ display: 'flex' }"
+        appendTo="body"
+        [ngModelOptions]="{ standalone: true }"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col-6">
+      <input pInputText value="{{ nombrePaciente }}" disabled />
+    </div>
+    <div class="field col-4">
+      <input
+        pInputText
+        [(ngModel)]="cedulaBuscada"
+        type="text"
+        name="cedulaBuscada"
+        placeholder="Ingrese Cédula"
+        required
+      />
+    </div>
+    <div class="field col-2">
+      <p-button
+        icon="pi pi-search"
+        [rounded]="true"
+        severity="info"
+        type="button"
+        (click)="btnEnvConsult()"
+      />
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="model.fecha"
+        name="fecha"
+        type="date"
+        placeholder="Fecha"
+        required
+        #fecha="ngModel"
+        (keypress)="util.textStringNotScape($event)"
+      />
+      <div *ngIf="fecha.invalid && fecha.touched" class="p-error">
+        Fecha es requerido.
+      </div>
+    </div>
+
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="model.hora"
+        name="hora"
+        type="time"
+        placeholder="Hora"
+        required
+        #hora="ngModel"
+        (keypress)="util.textStringNotScape($event)"
+      />
+      <div *ngIf="hora.invalid && hora.touched" class="p-error">
+        Hora es requerido.
+      </div>
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <textarea
+        rows="3"
+        cols="10"
+        [(ngModel)]="model.motivoCita"
+        name="motivoCita"
+        placeholder="Mótivo Cita"
+        pInputTextarea
+        required
+        #motivoCita="ngModel"
+      ></textarea>
+      <div *ngIf="motivoCita.invalid && motivoCita.touched" class="p-error">
+        Mótivo es requerido.
+      </div>
+    </div>
+  </div>
+
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <label  for="name1">Estado</label>
+      <p-dropdown
+        [options]="itemsEstado"
+        optionLabel="name"
+        optionValue="name"
+        [(ngModel)]="model.estado"
+        placeholder="Seleccione"
+        required
+        #estado="ngModel"
+        [style]="{ display: 'flex' }"
+        appendTo="body"
+        [ngModelOptions]="{ standalone: true }"
+      ></p-dropdown>
+    </div>
+
+    <div class="field col">
+      <label for="name1">Costo del Tratamiento</label>
+      <input
+        pInputText
+        name="costo"
+        placeholder="0.00"
+        [(ngModel)]="model.costo"
+        disabled="true"
+      />
+    </div>
+
+    
+  </div>
+  <div class="flex justify-content-center">      
+    <p-button
+      icon="pi pi-check"
+      [rounded]="true"
+      severity="success"
+      [disabled]="formulario.invalid"
+      (click)="btnEnvRequest()"
+    />
+  </div>
+</form>

@@ -1,0 +1,105 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+  background: url('/banner_2.png') center center no-repeat;
+  background-size: cover;
+  
+
+  .login-card {
+    width: 500px;
+    max-width: 90%; 
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: auto 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .logo {
+      margin-bottom: 1rem;
+    }
+
+    .password-input {
+      display: flex;
+      align-items: center;
+      input {
+        flex: 1;
+      }
+      .eye-button {
+        margin-left: 0.5rem;
+        background: none;
+        border: none;
+      }
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-top: 0.5rem;
+    }
+
+    .full-width {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .register {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 1rem 0;
+      span {
+        background: #fff;
+        padding: 0 1rem;
+        position: relative;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #ccc;
+      }
+    }
+
+    .google-button,
+    .apple-button {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .login-banner {
+    flex: 1;
+    background: url('/banner_1.jpg') center center no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    .banner-text {
+      text-align: center;
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      .banner-button {
+        background-color: #ffffff;
+        color: #0F8BA9;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.custom-login-button {
+  background: linear-gradient(to right, #0F8BA9, #49A8D4) !important;
+  border: none !important;
+  color: white !important;
+}

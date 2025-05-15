@@ -1,0 +1,18 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+    <app-topbar></app-topbar>
+    <div class="layout-sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="layout-main-container">
+        <div class="layout-main">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="layout-footer">
+            <img src="/logo-dark.svg" alt="Logo" height="20" class="mr-2"/>
+            by
+            <span class="font-medium ml-2">kbzO</span>
+        </div>
+    </div>
+    <div class="layout-mask"></div>
+</div>
+

@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@oauth/cita-info": ["libs/cita-info/src/index.ts"],
+      "@oauth/dashboard-ml": ["libs/dashboard-ml/src/index.ts"],
+      "@oauth/doctor-info": ["libs/doctor-info/src/index.ts"],
+      "@oauth/informacion-paciente": ["libs/paciente/src/index.ts"],
+      "@oauth/login": ["libs/login/src/index.ts"],
+      "@oauth/personal-info": ["libs/personal-info/src/index.ts"],
+      "@oauth/shared-config": ["libs/shared/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

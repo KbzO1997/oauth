@@ -1,0 +1,272 @@
+
+<!-- dental-diagram.component.html -->
+<div class="dental-diagram-container card">
+  <div class="p-grid">
+    <div class="col-12 xl:col-12">
+      <h2>Odontograma Dental</h2>
+
+      <!-- Descripción de tipos de dientes superiores -->
+      <div class="teeth-types">
+        <span class="type-label molar-label">Molares</span>
+        <span class="type-label premolar-label">Premolares</span>
+        <span class="type-label canine-label">Canino</span>
+        <span class="type-label incisor-label">Incisivos</span>
+        <span class="type-label canine-label">Canino</span>
+        <span class="type-label premolar-label">Premolares</span>
+        <span class="type-label molar-label">Molares</span>
+      </div>
+
+      <!-- Dientes superiores -->
+      <div class="teeth-row upper-teeth mb-7">
+        <div
+          *ngFor="let tooth of upperTeeth"
+          [ngClass]="getToothClass(tooth)"
+          
+        >
+          <div class="tooth-crown"></div>
+          <div class="tooth-root"></div>
+          <span class="tooth-id">{{ tooth.id_tooth }}</span>
+        </div>
+      </div>
+
+      <!-- Dientes inferiores -->
+      <div class="teeth-row lower-teeth">
+        <div
+          *ngFor="let tooth of lowerTeeth"
+          [ngClass]="getToothClass(tooth)"
+          
+        >
+          <div class="tooth-root"></div>
+          <div class="tooth-crown"></div>
+          <span class="tooth-id">{{ tooth.id_tooth }}</span>
+        </div>
+      </div>
+
+      <!-- Descripción de tipos de dientes inferiores -->
+      <div class="teeth-types">
+        <span class="type-label molar-label">Molares</span>
+        <span class="type-label premolar-label">Premolares</span>
+        <span class="type-label canine-label">Canino</span>
+        <span class="type-label incisor-label">Incisivos</span>
+        <span class="type-label canine-label">Canino</span>
+        <span class="type-label premolar-label">Premolares</span>
+        <span class="type-label molar-label">Molares</span>
+      </div>
+
+      
+
+    </div>
+  </div>
+
+  <!-- Diálogo para detalles del diente -->
+  <p-dialog
+    header="Detalles del Diente"
+    [closable]="true"
+    [(visible)]="displayToothDetails"
+    [modal]="true"
+    showEffect="fade"
+    [style]="{ width: '45vw' }"
+    [breakpoints]="{ '960px': '75vw' }"
+  >
+    <div *ngIf="selectedTooth" class="card p-fluid mt-2">
+      <div class="p-formgrid grid">
+        <div class="field col">
+          <p>Diente:</p>
+          <p>#{{ selectedTooth.id_tooth }} - {{ selectedTooth.tipo | titlecase }}</p>
+        </div>
+
+        <div class="field col">
+          <p>Cuadrante:</p>
+          <p>{{ selectedTooth.quadrant }}</p>
+        </div>
+
+        <div class="field col">
+          <p>Estado:</p>
+          <p-dropdown
+            [options]="statusOptions"
+            [(ngModel)]="selectedTooth.estado"
+            optionLabel="label"
+            optionValue="value"
+          ></p-dropdown>
+        </div>
+      </div>
+
+      <br /><br /><br /><br /><br /><br /><br />
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Guardar"
+        icon="pi pi-check"
+        (click)="updateToothStatus()"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</div>
+
+<div class="grid card">
+  <!-- Tabla principal -->
+  <div class="col-6">
+    <p-table
+      [value]="datosPiezas"
+      class="tabla-principal"
+      responsiveLayout="scroll"
+      editable="true"
+      styleClass="p-datatable-gridlines"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th colspan="7">
+            <span class="texto-centro">INDICADORES DE SALUD BUCAL</span>
+          </th>
+        </tr>
+        <tr>
+          <th>PIEZAS DENTALES</th>
+          <th colspan="3">HIGIENE ORAL SIMPLIFICADA</th>
+        </tr>
+        <tr>
+          <th class="text-center">
+            
+          </th>
+          <th>PLACA<br />(0-1-2-3)</th>
+          <th>CÁLCULO<br />(0-1-2-3)</th>
+          <th>GINGIVITIS<br />(0-1)</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData let-ri="rowIndex">
+        <tr>
+          <td class="text-center">
+            {{ rowData.pieza }}
+          </td>
+          <td>
+            {{ rowData.placa }}
+          </td>
+          <td>
+            {{ rowData.calculo }}
+          </td>
+          <td>
+            {{ rowData.gingivitis }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- Tabla Enfermedad Periodontal -->
+  <div class="col-6">
+    <p-table
+      styleClass="p-datatable-gridlines" 
+      [value]="enfermedadPeriodontal"
+      class="tabla-enfermedad"
+      responsiveLayout="scroll"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ENFERMEDAD PERIODONTAL</th>
+          <th>MAL OCLUSIÓN</th>
+          <th>FLUOROSIS</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+        <tr>
+          <!-- Enfermedad Periodontal -->
+          <td>
+            <div class="row-space-between">
+              <span class="text-left">{{ rowData.enfermedad }}</span>
+              <p-radioButton
+                name="enfermedad"
+                [value]="rowData.enfermedad"
+                [(ngModel)]="itemEnfermedad"
+                inputId="enfermedad{{ rowIndex }}"
+                disabled="true"
+              />
+            </div>
+          </td>
+
+          <!-- Mal Oclusión -->
+          <td>
+            <div class="row-space-between">
+              <span class="text-left">{{ rowData.oclusion }}</span>
+              <p-radioButton
+                name="oclusion"
+                [value]="rowData.oclusion"
+                [(ngModel)]="itemOclusion"
+                inputId="oclusion{{ rowIndex }}"
+                disabled="true"
+              />
+            </div>
+          </td>
+
+          <!-- Fluorosis -->
+          <td>
+            <div class="row-space-between">
+              <span class="text-left">{{ rowData.fluorosis }}</span>
+              <p-radioButton
+                name="fluorosis"
+                [value]="rowData.fluorosis"
+                [(ngModel)]="itemFluorosis"
+                inputId="fluorosis{{ rowIndex }}"
+                disabled="true"
+              />
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <!-- Tabla de índices CPO-ceo -->
+    <div class="indices_CPO-ceo">
+      <p-table
+        styleClass="p-datatable-gridlines" 
+        [value]="datosIndiceCPO"
+        class="tabla-indice"
+        responsiveLayout="scroll"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th colspan="5" class="titulo-tabla">ÍNDICES CPO-ceo</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>C</th>
+            <th>P</th>
+            <th>O</th>
+            <th>TOTAL</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData>
+          <tr>
+            <td>{{ rowData.tipo }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <tr>
+            <th></th>
+            <th>c</th>
+            <th>e</th>
+            <th>o</th>
+            <th>TOTAL</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData>
+          <tr>
+            <td>{{ rowData.tipoMin }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

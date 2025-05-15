@@ -1,0 +1,29 @@
+{
+  "name": "informacion-paciente",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/paciente/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/paciente/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/paciente/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/paciente/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

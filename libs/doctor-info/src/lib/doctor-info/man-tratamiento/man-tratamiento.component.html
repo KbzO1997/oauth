@@ -1,0 +1,131 @@
+<p-toast></p-toast>
+
+<div class="card">
+  <p-table
+    #dt
+    dataKey="id"
+    styleClass="p-datatable-gridlines"
+    responsiveLayout="scroll"
+    [value]="list"
+    [rows]="5"
+    [rowHover]="true"
+    [paginator]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [globalFilterFields]="['nombre', 'costo']"
+    [rowsPerPageOptions]="[10, 20, 30]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas."
+  >
+    <ng-template pTemplate="caption">
+      <div
+        class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+      >
+        <p-button
+          label="Nuevo Registro"
+          icon="pi pi-heart"
+          severity="info"
+          class="mr-2"
+          (onClick)="btnOpenModal()"
+        />
+        <span class="block mt-2 md:mt-0 p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="util.onGlobalFilter(dt, $event)"
+            placeholder="Buscar..."
+            class="w-full sm:w-auto"
+          />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Acción</th>
+        <th>Nombre</th>
+        <th>Costo</th>
+        <th>Estado</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-model>
+      <tr>
+        <td class="text-center">
+          <p-button
+            icon="pi pi-pencil"
+            [rounded]="true"
+            [text]="true"
+            [raised]="true"
+            severity="primary"
+            class="mr-2"
+            (onClick)="btnEnvEditRequest(model)"
+          />
+          <p-button
+            class="mr-2"
+            icon="pi pi-times"
+            [rounded]="true"
+            [text]="true"
+            [raised]="true"
+            severity="danger"
+            (onClick)="btnEnvInactiveRequest(model.idTratamiento)"
+          />
+        </td>
+        <td>{{ model.nombre }}</td>
+        <td>{{ model.costo | currency : 'USD' }}</td>
+        <td class="text-center">
+          <span [class]="'customer-badge status-' + model.estado">
+            {{ model.estado === 'A' ? 'Activo' : 'Eliminado' }}
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  [closable]="true"
+  [(visible)]="dialogVisible"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{ width: '45vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+  [header]="editando ? 'Editar Registro' : 'Nuevo Registro'"
+>
+  <form
+    [formGroup]="tratamientoForm"
+    class="card p-fluid mt-2"
+    autocomplete="off"
+  >
+    <div class="p-formgrid grid">
+      <div class="field col">
+        <input
+          id="nombre"
+          pInputText
+          formControlName="nombre"
+          placeholder="Nombre"
+        />
+      </div>
+      <div class="field col">
+        <input
+          id="costo"
+          pInputText
+          type="text"
+          formControlName="costo"
+          placeholder="Costo"
+          mask="00.00"
+  decimalMarker="."
+  thousandSeparator=""
+        />
+      </div>
+      <div class="flex justify-content-center">
+        <p-button
+          icon="pi pi-check"
+          [rounded]="true"
+          severity="success"
+          [disabled]="tratamientoForm.invalid"
+          (click)="btnEnvRequest()"
+        />
+      </div>
+    </div>
+  </form>
+</p-dialog>

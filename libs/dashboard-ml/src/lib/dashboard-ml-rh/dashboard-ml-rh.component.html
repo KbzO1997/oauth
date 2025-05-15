@@ -1,0 +1,67 @@
+<style>
+  .img-responsive {
+  max-width: 100%; /* Hace que la imagen no se salga del contenedor */
+  height: auto;    /* Mantiene la proporción de la imagen */
+}
+</style>
+
+<div class="surface-card p-4 shadow-2 border-round">
+  <div class="mb-2 flex align-items-center justify-content-between">
+    <div class="flex align-items-center"><i class="pi pi-cloud text-500 mr-2 text-xl"></i>
+      <span class="text-xl font-medium text-900">¡Bienvenido,  {{nameUser}}!</span>
+    </div>
+  </div>
+  <div class="font-medium text-500 mb-3">{{ currentDate }}</div>
+<hr>
+  <!--Imagenes Ini-->
+<div class="grid">
+  
+  <div class="col-12 xl:col-6">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <h5>Segmentación Spectral</h5>        
+          <button pButton type="button" icon="pi pi-download" (click)="downloadImage('Spectral.svg')"
+          class="p-button-rounded p-button-text p-button-plain"></button>
+      </div>
+      <img src="/ml/Spectral.svg" alt="Image"  class="mb-3 img-responsive">
+    </div>
+  </div>
+
+  <div class="col-12 xl:col-6">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <h5>Segmentación Rfm</h5>        
+          <button pButton type="button" icon="pi pi-download" (click)="downloadImage('RFM.svg')"
+            class="p-button-rounded p-button-text p-button-plain"></button>
+      </div>
+      <img src="/ml/RFM.svg" alt="Image"  class="mb-3 img-responsive">
+    </div>
+  </div>
+
+  <div class="col-12 xl:col-6">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <h5>Segmentación Lineal</h5>        
+          <button pButton type="button" icon="pi pi-download" (click)="downloadImage('RFM.svg')"
+            class="p-button-rounded p-button-text p-button-plain"></button>
+      </div>
+      <p-chart type="line" [data]="salesData" [options]="chartOptions" style="width: 100%;"></p-chart>
+    </div>
+  </div>
+
+  <div class="col-12 xl:col-6">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <h5>Segmentación de Barras</h5>        
+          <button pButton type="button" icon="pi pi-download" (click)="downloadImage('RFM.svg')"
+            class="p-button-rounded p-button-text p-button-plain"></button>
+      </div>
+      <p-chart type="bar" [data]="barChartData" [options]="barChartOptions"></p-chart>
+    </div>
+  </div>
+</div>
+<!--Imagenes Ini-->
+
+</div>
+
+

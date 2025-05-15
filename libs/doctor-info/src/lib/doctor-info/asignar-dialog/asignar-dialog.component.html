@@ -1,0 +1,47 @@
+<form #formulario="ngForm" class="card p-fluid mt-2" autocomplete="off">
+  <div class="p-formgrid grid">
+    <div class="field col">
+      <p-dropdown
+        [options]="items"
+        optionLabel="nombreEspecialidad"
+        optionValue="idEspecialidad"
+        [(ngModel)]="model.idEspecialidad"
+        placeholder="Seleccione Especialidad"
+        required
+        #rol="ngModel"
+        [style]="{ display: 'flex' }"
+        appendTo="body"
+        [ngModelOptions]="{ standalone: true }"
+      ></p-dropdown>
+    </div>
+    <div class="field col">
+      <input
+        pInputText
+        [(ngModel)]="model.numeroColegiado"
+        name="numeroColegiado"
+        type="text"
+        placeholder="Número Colagiado"
+        required
+        maxlength="12"
+        #numeroColegiado="ngModel"
+      />
+      <div
+        *ngIf="numeroColegiado.invalid && numeroColegiado.touched"
+        class="p-error"
+      >
+        Número de Colegiado es requerido.
+      </div>
+    </div>
+
+    <div class="flex justify-content-center">
+      <p-button
+        icon="pi pi-check"
+        [rounded]="true"
+        severity="success"
+        [disabled]="formulario.invalid"
+        (click)="btnEnvRequest()"
+      />
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,87 @@
+<div class="col-12 md:col-12">
+  <div class="card">
+    <p-table
+      #dt
+      dataKey="id"
+      styleClass="p-datatable-gridlines"
+      responsiveLayout="scroll"
+      [value]="list"
+      [rows]="5"
+      [rowHover]="true"
+      [paginator]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [globalFilterFields]="[
+        'nombres',
+        'primerApellido',
+        'segundoApellido',
+        'estado'
+      ]"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas."
+    >
+      <ng-template pTemplate="caption">
+        <div
+          class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+        >
+          <span class="block mt-2 md:mt-0 p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="util.onGlobalFilter(dt, $event)"
+              placeholder="Buscar..."
+              class="w-full sm:w-auto"
+            />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr class="bg-primary text-white">          
+          <th>Tratamiento</th>
+          <th>Médico</th>
+          <th>Paciente</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Motivo</th>
+          <th>Estado</th>
+          <th>Pago</th>
+          <th>Costo</th>
+          <th>Pagado</th>          
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-model>
+        <tr>
+          <td>{{ model.tratamiento.nombre }}</td>
+          <td>
+            {{ model.doctor.persona.nombres }}
+            {{ model.doctor.persona.primerApellido }}
+            {{ model.doctor.persona.segundoApellido }}
+          </td>
+          <td>
+            {{ model.paciente.persona.nombres }}
+            {{ model.paciente.persona.primerApellido }}
+            {{ model.paciente.persona.segundoApellido }}
+          </td>
+          <td>{{ model.fecha }}</td>
+          <td>{{ model.hora }}</td>
+          <td>{{ model.motivoCita }}</td>
+          <td>{{ model.estado }}</td>
+          <td>
+            <ng-container *ngIf="model.valor_pago > 0; else editarIcono">
+              <i class="pi pi-money-bill" style="color: green" title="Aplicado"> Aplicado</i>
+            </ng-container>
+            <ng-template #editarIcono>
+              <i class="pi pi-spinner-dotted" style="color: red" title="Pendiente"> Pendiente</i>
+            </ng-template>
+          </td>
+          <td>{{ model.costo  | currency:'USD' }}</td>
+          <td>{{ model.valor_pago   | currency:'USD'}}</td>
+         
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

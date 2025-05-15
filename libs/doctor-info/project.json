@@ -1,0 +1,29 @@
+{
+  "name": "doctor-info",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/doctor-info/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/doctor-info/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/doctor-info/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/doctor-info/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

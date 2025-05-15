@@ -1,0 +1,50 @@
+<div class="card p-fluid mt-2">
+  <full-calendar
+    [options]="calendarOptions"
+    style="width: 100%"
+  ></full-calendar>
+</div>
+
+<p-dialog
+  header="Detalles de la Cita"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '350px' }"
+>
+  <div class="card p-fluid mt-2">
+    <div class="p-formgrid">
+      <div class="field col">
+        <strong><i class="pi pi-calendar mr-2"></i>Fecha Hora:</strong>
+        <p>
+          {{ citaSeleccionada.fecha | date : 'fullDate' }}
+          {{ citaSeleccionada.hora }}
+        </p>
+      </div>
+
+      <div class="field col">
+        <strong><i class="pi pi-user md-2"></i> Doctor:</strong>
+        <p>
+          {{ citaSeleccionada.doctor?.persona.nombres }}
+          {{ citaSeleccionada.doctor?.persona.primerApellido }}
+          {{ citaSeleccionada.doctor?.persona.segundoApellido }}
+        </p>
+      </div>
+
+      <div class="field col">
+        <strong><i class="pi pi-heart mr-2"></i> Tratamiento:</strong>
+        <p>{{ citaSeleccionada.tratamiento?.nombre }}</p>
+      </div>
+
+      <div class="field col">
+        <strong><i class="pi pi-comment mr-2"></i> Motivo:</strong>
+        <p>{{ citaSeleccionada.motivoCita }}</p>
+      </div>
+
+      <div class="field col">
+        <strong><i class="pi pi-dollar mr-2"></i> Costo: ${{ citaSeleccionada.costo }}</strong>
+        
+      </div>
+    </div>
+  </div>
+</p-dialog>

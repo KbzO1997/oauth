@@ -1,0 +1,102 @@
+
+  <form #formulario="ngForm" class="card p-fluid mt-2" autocomplete="off">
+    <div class="p-formgrid grid">
+      <div class="field col">
+        <label for="tratamientoMedico">Sigue álgun tratamiento médico?</label> 
+        <p-dropdown
+          [options]="items"
+          optionLabel="code"
+          optionValue="name"
+          [(ngModel)]="model.tratamientoMedico"
+          placeholder="Seleccione"
+          required
+          #tratamientoMedico="ngModel"
+          [style]="{ display: 'flex' }"
+          appendTo="body"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-dropdown>
+      </div>
+
+      <div class="field col">
+        <label for="propensoHemorragia">Propenso a hemorragia?</label>
+        <p-dropdown
+          [options]="items"
+          optionLabel="code"
+          optionValue="name"
+          [(ngModel)]="model.propensoHemorragia"
+          placeholder="Seleccione"
+          required
+          #propensoHemorragia="ngModel"
+          [style]="{ display: 'flex' }"
+          appendTo="body"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <div class="p-formgrid grid">
+      <div class="field col">
+        <label for="hipertenso">Hipertenso?</label>
+        <p-dropdown
+          [options]="items"
+          optionLabel="code"
+          optionValue="name"
+          [(ngModel)]="model.hipertenso"
+          placeholder="Seleccione"
+          required
+          #hipertenso="ngModel"
+          [style]="{ display: 'flex' }"
+          appendTo="body"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-dropdown>
+      </div>
+
+      <div class="field col">
+        <label for="diabetico">Diabetico?</label>
+        <p-dropdown
+          [options]="items"
+          optionLabel="code"
+          optionValue="name"
+          [(ngModel)]="model.diabetico"
+          placeholder="Seleccione"
+          required
+          #diabetico="ngModel"
+          [style]="{ display: 'flex' }"
+          appendTo="body"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <div class="p-formgrid grid">
+      <div class="field col">
+        <label for="alergiaMedica">Alérgico a algún medícamento?</label>
+        <textarea
+          rows="3"
+          cols="10"
+          [(ngModel)]="model.alergiaMedica"
+          name="alergiaMedica"
+          placeholder="Alergias"
+          pInputTextarea
+          required
+          #alergiaMedica="ngModel"
+        ></textarea>
+        <div
+          *ngIf="alergiaMedica.invalid && alergiaMedica.touched"
+          class="p-error"
+        >
+          Alergia es requerido.
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-content-center">
+      <p-button
+        icon="pi pi-user"
+        [rounded]="true"
+        severity="success"
+        [disabled]="formulario.invalid"
+        (click)="btnEnvRequest()"
+      />
+    </div>
+  </form>

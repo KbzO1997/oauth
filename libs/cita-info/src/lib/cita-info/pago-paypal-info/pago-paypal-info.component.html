@@ -1,0 +1,82 @@
+<!--
+<p-card header="Pasarela de Pago con PayPal">
+  <p>Presiona el botón para proceder con el pago.</p>
+  <p-button pButton label="Pagar con PayPal" icon="pi pi-paypal" (click)="abrirModalPaypal()"></p-button>
+
+  <p-button pButton label="Pagar con PayPal" icon="pi pi-paypal" (click)="btnEnvRequest()"></p-button>
+</p-card>-->
+
+
+<p-dialog header="Pagar con PayPal" [(visible)]="display" [modal]="true" [style]="{width: '400px'}">
+  <div id="paypal-buttons-container" class="mt-2"></div>
+</p-dialog>
+
+
+<div class="ng-star-inserted">
+  <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+    
+    <ul class="list-none p-0 m-0">
+      <li
+        class="flex flex-column md:flex-row py-6 border-top-1 border-bottom-1 surface-border md:align-items-center"
+      >
+        <img alt="X"
+          src="banner_medic.png"
+          class="w-20rem flex-shrink-0 mx-auto md:mx-0"
+        />
+        <div class="flex-auto py-5 md:pl-5">
+          <div
+            class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border pb-6"
+          >
+            <div class="w-full sm:w-6 flex flex-column">
+              <span class="text-900 text-xl font-medium mb-3">Cita Medica - Odontología</span
+              ><span class="text-600"><i class="pi pi-user text-600 mr-2"></i
+                >Paciente: {{model.paciente?.persona?.nombres}} 
+                {{model.paciente?.persona?.primerApellido}}
+                {{model.paciente?.persona?.segundoApellido}}
+              </span>
+            </div>
+            <div
+              class="w-full sm:w-6 flex align-items-start justify-content-between sm:mt-0"
+            >
+              
+            <div class="flex flex-row align-items-center gap-3 mt-4 sm:justify-content-end">
+              <span class="text-900 text-xl font-medium">
+                Costo: {{model.costo | currency:'USD'}}
+              </span>
+              <p-button 
+                icon="pi pi-paypal"
+                [rounded]="true"
+                [text]="true"
+                [raised]="true"
+                severity="primary"
+                (onClick)="btnEnvRequest()" />
+            </div>
+            
+            </div>
+          </div>
+          <div class="flex flex-column">
+            <span class="inline-flex align-items-center mb-3"
+              ><i class="pi pi-building text-600 mr-2"></i
+              ><span class="text-600">Modalidad: Presencial</span></span
+            >
+            <span class="inline-flex align-items-center mb-3"
+              ><i class="pi pi-wave-pulse text-600 mr-2"></i
+              ><span class="text-600 mr-2">Tratamiento: {{model.tratamiento?.nombre}}</span></span
+            ><span class="inline-flex align-items-center mb-3"
+              ><i class="pi pi-calendar-plus text-600 mr-2"></i
+              ><span class="text-600 mr-2"
+                >Fecha y Hora: 
+                <span class="font-bold">
+                  {{model.fecha | date:'yyyy/MM/dd'}}
+                  {{model.hora}}
+                </span></span
+              ></span
+            >
+          </div>
+        </div>
+      </li>
+     
+    </ul>
+    
+  </div>
+</div>
