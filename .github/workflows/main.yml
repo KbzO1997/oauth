@@ -1,0 +1,37 @@
+name: Deploy OAuth to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Reemplaza con la rama principal de tu repositorio
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código fuente
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configuración de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Usa la versión adecuada de Node.js
+          cache: 'npm'
+
+      # 3. Instalación de dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Construir el proyecto
+      - name: Build OAuth project
+        run: npx nx build oauth --prod --base-href=/oauth/
+        
+      # 5. Desplegar en GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # Rama donde se publicará el contenido
+          folder: dist/apps/oauth/browser  # Ruta al directorio generado por el build
