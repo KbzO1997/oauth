@@ -1,14 +1,24 @@
-<div class="login-container">
+<div
+  class="login-container"
+  [ngStyle]="{ 
+    'background-image': 'url(./banner_2.png)',
+    'background-position': 'center',
+    'background-repeat': 'no-repeat',
+    'background-size': 'cover',
+    'height': '100vh',
+    'display': 'flex'
+  }"
+>
   <div class="login-card">
-    
     <h2>Bienvenido</h2>
     <p>Iniciar sesión en Doctocliq</p>
+    
     <div class="logo">
-      <img src="/logo.png" alt="Doctocliq Logo" width="120" />
+      <img src="./logo.png" alt="Doctocliq Logo" width="120" />
     </div>
+
     <form autocomplete="off" (ngSubmit)="loginWithDb()">
       <div class="form-group">
-       
         <input
           [(ngModel)]="model.username"
           name="username"
@@ -19,9 +29,8 @@
           style="padding: 1rem"
         />
       </div>
-      
+
       <div class="form-group mt-2">
-        
         <input
           [(ngModel)]="model.password"
           name="password"
@@ -32,21 +41,36 @@
           style="padding: 1rem"
         />
       </div>
-     <div class="form-group mt-2 text-center">
-      <p-button 
-        type="submit"
-        label="Iniciar Sesión" 
-        icon="pi pi-sign-in" 
-        class="p-button-rounded p-button-success" 
-      >
-      </p-button>
-     </div>
-    
+
+      <div class="form-group mt-2 text-center">
+        <p-button
+          type="submit"
+          label="Iniciar Sesión"
+          icon="pi pi-sign-in"
+          class="p-button-rounded p-button-success"
+        >
+        </p-button>
+      </div>
     </form>
-
-    
-
   </div>
 
-  <div class="login-banner"></div>
+  <div
+    class="login-banner"
+    [ngStyle]="{
+      'flex': '1',
+      'background-image': 'url(./banner_1.jpg)',
+      'background-position': 'center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'display': 'flex',
+      'align-items': 'center',
+      'justify-content': 'center',
+      'color': 'white'
+    }"
+  >
+    <div class="banner-text">
+      <h1>¡Bienvenido a Doctocliq!</h1>
+      <button class="banner-button">Registrarse</button>
+    </div>
+  </div>
 </div>
