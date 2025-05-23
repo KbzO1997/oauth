@@ -67,4 +67,10 @@ export class InformacionPacienteComponent implements OnInit{
     this.id = id;
     this.modo = modo;
   }
+
+  exportarPdf() {
+    const columnas = ['persona.nombres', 'persona.primerApellido', 'persona.segundoApellido', 'persona.cedula', 'persona.telefono', 'persona.email', 'persona.contacto'];
+    const headers = ['Nombres', 'Apellido Paterno', 'Apellido Materno', 'Cédula', 'Teléfono', 'E-Mail', 'Contacto',];     
+    this.util.exportarPDF(this.list, columnas, headers, 'Reporte_Pacientes');
+  }
 }

@@ -38,4 +38,11 @@ export class HistorialCitaComponent implements OnInit{
       }});
     } catch (error) {console.log(error);}    
   }
+
+  exportarPdf() {
+    const columnas = ['tratamiento.nombre', 'doctor.persona.nombres', 'doctor.persona.primerApellido', 'doctor.persona.segundoApellido', 'paciente.persona.nombres', 'paciente.persona.primerApellido', 'paciente.persona.segundoApellido', 'fecha', 'hora', 'motivoCita', 'estado', 'valor_pago']; 
+    const headers = ['Tratamiento', 'Doctor', 'Apellido Paterno', 'Apellido Materno', 'Paciente', 'Apellido Paterno', 'Apellido Materno','Fecha', 'Hora', 'Motivo', 'Estado', 'Costo'];    
+    this.util.exportarPDF(this.list, columnas, headers, 'Reporte_Historial_Citas');
+  }
+
 }

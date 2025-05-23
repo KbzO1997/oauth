@@ -70,4 +70,10 @@ export class ConsultarPersonasComponent implements OnInit{
       this.registerDialog.resetForm();
     }
   }
+
+  exportarPdf() {
+    const columnas = ['persona.nombres', 'persona.primerApellido', 'persona.segundoApellido', 'persona.cedula', 'username', 'persona.contacto', 'rol'];
+    const headers = ['Nombres', 'Apellido Paterno', 'Apellido Materno', 'Cédula', 'Usuario', 'Contacto', 'Rol'];     
+    this.util.exportarPDF(this.listUsuario, columnas, headers, 'Reporte_Personas');
+  }
 }

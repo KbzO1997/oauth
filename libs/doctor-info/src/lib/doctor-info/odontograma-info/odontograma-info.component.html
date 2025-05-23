@@ -5,6 +5,9 @@
     <div class="col-12 xl:col-12">
       <h2>Odontograma Dental</h2>
 
+     
+
+
       <!-- Descripción de tipos de dientes superiores -->
       <div class="teeth-types">
         <span class="type-label molar-label">Molares</span>
@@ -132,7 +135,7 @@
 
 <div class="grid card">
   <!-- Tabla principal -->
-  <div class="col-6">
+  <div class="col-6">    
     <p-table
       [value]="datosPiezas"
       class="tabla-principal"
@@ -283,8 +286,38 @@
     </p-table>
 
     <!-- Tabla de índices CPO-ceo -->
-    <div class="indices_CPO-ceo">
-      <p-table
+    <div class="indices_CPO-ceo mt-2">
+       <p-accordion [multiple]="true">
+  <p-accordionTab header="1. Placa">
+    <p>Es la suciedad que se forma en los dientes (restos de comida, bacterias).</p>
+    <ul>
+      <li><strong>0:</strong> No hay placa visible.</li>
+      <li><strong>1:</strong> Hay muy poca placa (poca acumulación).</li>
+      <li><strong>2:</strong> Hay placa moderada (se ve fácilmente).</li>
+      <li><strong>3:</strong> Hay mucha placa (dientes muy sucios).</li>
+    </ul>
+  </p-accordionTab>
+
+  <p-accordionTab header="2. Cálculo">
+    <p>Es el sarro endurecido que se forma si no se limpia la placa.</p>
+    <ul>
+      <li><strong>0:</strong> No hay cálculo.</li>
+      <li><strong>1:</strong> Cálculo muy pequeño.</li>
+      <li><strong>2:</strong> Cálculo moderado.</li>
+      <li><strong>3:</strong> Cálculo severo (mucho sarro).</li>
+    </ul>
+  </p-accordionTab>
+
+  <p-accordionTab header="3. Gingivitis">
+    <p>Es la inflamación de las encías (enrojecimiento, sangrado).</p>
+    <ul>
+      <li><strong>0:</strong> No hay gingivitis (encías normales).</li>
+      <li><strong>1:</strong> Sí hay gingivitis (encías inflamadas o sangrantes).</li>
+    </ul>
+  </p-accordionTab>
+</p-accordion>
+
+      <!--<p-table
         styleClass="p-datatable-gridlines" 
         [value]="datosIndiceCPO"
         class="tabla-indice"
@@ -332,7 +365,7 @@
             <td></td>
           </tr>
         </ng-template>
-      </p-table>
+      </p-table>-->
     </div>
   </div>
 </div>

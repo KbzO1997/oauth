@@ -1,74 +1,128 @@
-
 <div class="col-12 md:col-12">
-    <div class="card">
-        <p-table #dt dataKey="id"
-            styleClass="p-datatable-gridlines" 
-            responsiveLayout="scroll"
-            [value]="listUsuario"     
-            [rows]="5"
-            [rowHover]="true"
-            [paginator]="true" 
-            [tableStyle]="{ 'min-width': '50rem' }"
-            [globalFilterFields]="['nombres', 'primerApellido', 'segundoApellido','username','estado']" 
-            [rowsPerPageOptions]="[10,20,30]" 
-            [showCurrentPageReport]="true"            
-            currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas.">
+  <div class="card">
+    <p-table
+      #dt
+      dataKey="id"
+      styleClass="p-datatable-gridlines"
+      responsiveLayout="scroll"
+      [value]="listUsuario"
+      [rows]="5"
+      [rowHover]="true"
+      [paginator]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [globalFilterFields]="[
+        'nombres',
+        'primerApellido',
+        'segundoApellido',
+        'username',
+        'estado'
+      ]"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas."
+    >
+      <ng-template pTemplate="caption">
+        <div
+          class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+        >
+          <p-button
+            label="Registrar Usuario"
+            icon="pi pi-user-plus"
+            severity="info"
+            class="mr-2"
+            (onClick)="btnOpenModal()"
+          />          
+          <p-button
+              class="mr-2"
+              icon="pi pi-file-pdf"
+              [rounded]="true"
+              [text]="true"
+              [raised]="true"
+              severity="danger"
+              (onClick)="exportarPdf()"
+            />
+          <span class="block mt-2 md:mt-0 p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="util.onGlobalFilter(dt, $event)"
+              placeholder="Buscar..."
+              class="w-full sm:w-auto"
+            />
+          </span>
+        </div>
+      </ng-template>
 
-            <ng-template pTemplate="caption">
-                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <p-button label="Registrar Usuario" icon="pi pi-user-plus" severity="info" class="mr-2" (onClick)="btnOpenModal()" />
-                    <span class="block mt-2 md:mt-0 p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="util.onGlobalFilter(dt, $event)" placeholder="Buscar..."  class="w-full sm:w-auto"/>
-                    </span>
-                </div>
-            </ng-template>
+      <ng-template pTemplate="header">
+        <tr class="bg-primary text-white">
+          <th>Acción</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Cédula</th>
+          <th>Usuario</th>
+          <th>Contacto</th>
+          <th>Rol</th>
+          <th>Estado</th>
+        </tr>
+      </ng-template>
 
-            <ng-template pTemplate="header">
-                <tr class="bg-primary text-white">
-                    <th>Acción</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Cédula</th>
-                    <th>Usuario</th>
-                    <th>Contacto</th>
-                    <th>Rol</th>
-                    <th>Estado</th>
-                </tr>
-            </ng-template>
-
-            <ng-template pTemplate="body" let-model>
-                <tr>
-                    <td class="text-center">
-                        <p-button class="mr-2" icon="pi pi-times" [rounded]="true" [text]="true" [raised]="true" severity="danger" (onClick)="btnEnvInactiveRequest(model.id)" />
-                        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" [raised]="true" severity="primary" (onClick)="btnEnvEditRequest(model.id)" />
-                    </td>
-                    <td>{{model.persona.nombres}}</td>
-                    <td>{{model.persona.primerApellido}} {{model.persona.segundoApellido}}</td>
-                    <td>{{model.persona.cedula}}</td>
-                    <td>{{model.username}}</td>
-                    <td>{{model.persona.contacto}}</td>
-                    <td>{{model.rol}}</td>
-                    <td class="text-center">
-                        <span [class]="'customer-badge status-' + model.estado"> {{ model.estado === 'A' ? 'Activo' : 'Eliminado' }} </span>
-                    </td>                        
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
+      <ng-template pTemplate="body" let-model>
+        <tr>
+          <td class="text-center">
+            <p-button
+              class="mr-2"
+              icon="pi pi-times"
+              [rounded]="true"
+              [text]="true"
+              [raised]="true"
+              severity="danger"
+              (onClick)="btnEnvInactiveRequest(model.id)"
+            />
+            <p-button
+              icon="pi pi-pencil"
+              [rounded]="true"
+              [text]="true"
+              [raised]="true"
+              severity="primary"
+              (onClick)="btnEnvEditRequest(model.id)"
+            />
+          </td>
+          <td>{{ model.persona.nombres }}</td>
+          <td>
+            {{ model.persona.primerApellido }}
+            {{ model.persona.segundoApellido }}
+          </td>
+          <td>{{ model.persona.cedula }}</td>
+          <td>{{ model.username }}</td>
+          <td>{{ model.persona.contacto }}</td>
+          <td>{{ model.rol }}</td>
+          <td class="text-center">
+            <span [class]="'customer-badge status-' + model.estado">
+              {{ model.estado === 'A' ? 'Activo' : 'Eliminado' }}
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
 
-<p-dialog 
-[closable]="true" 
-[(visible)]="dialog" 
-[modal]="true" 
-showEffect="fade" 
-[style]="{width: '45vw'}" 
-[breakpoints]="{'960px': '75vw'}"
-(onShow)="resetForm()">
-<ng-template pTemplate="header">
-    <i class="pi pi-user-plus" style="margin-right: .5rem"></i>
+<p-dialog
+  [closable]="true"
+  [(visible)]="dialog"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{ width: '45vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+  (onShow)="resetForm()"
+>
+  <ng-template pTemplate="header">
+    <i class="pi pi-user-plus" style="margin-right: 0.5rem"></i>
     Registrarse al sistema.
   </ng-template>
-<app-register-dialog #registerDialog (registroExitoso)="dialog = false"></app-register-dialog>
+  <app-register-dialog
+    #registerDialog
+    (registroExitoso)="dialog = false"
+  ></app-register-dialog>
 </p-dialog>

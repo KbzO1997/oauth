@@ -11,7 +11,8 @@ import { CitaDialogComponent } from './cita-dialog/cita-dialog.component';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
 import { ArchivoInfoComponent } from '@oauth/informacion-paciente';
-
+import { MenuItem } from 'primeng/api';
+import { SplitButtonModule } from 'primeng/splitbutton';
 @Component({
   selector: 'app-cita-info',
   standalone: true,
@@ -22,7 +23,8 @@ import { ArchivoInfoComponent } from '@oauth/informacion-paciente';
     DialogModule,
     CitaDialogComponent,
     TagModule,
-    ArchivoInfoComponent
+    ArchivoInfoComponent,
+    SplitButtonModule
   ],
   templateUrl: './cita-info.component.html'
 })
@@ -42,13 +44,17 @@ export class CitaInfoComponent implements OnInit{
 
   ngOnInit() {
     this.envConsultAll();
+    
   }
 
   envConsultAll(): void {
     try {
       this.serv.envConsultTransaction().subscribe({next: (resp) => {
-        this.list = resp;
-        console.log(this.list);
+        //this.list = resp;
+        this.list = resp.map(model => ({
+          ...model,
+          menuItems: this.getActions(model) 
+        }));
       }});
     } catch (error) {console.log(error);}    
   }
@@ -93,4 +99,36 @@ export class CitaInfoComponent implements OnInit{
   limpiarArchivoInfo() {
     this.archivoInfoComponent.cleanArchive();
   }
+
+  getActions(model: any): MenuItem[] {
+  return [
+    {
+      label: 'Cancelar',
+      icon: 'pi pi-times',
+      command: () => this.btnEnvEditRequest(model.id_cita)
+    },
+    {
+      label: 'Pagar',
+      icon: 'pi pi-paypal',
+      command: () => this.btnRedirectPagar(model.idCita)
+    },
+    {
+      label: 'Odontograma',
+      icon: 'pi pi-folder-open',
+      command: () => this.btnRedirectExaminar(model.idCita)
+    },
+    {
+      label: 'Revisión Dental',
+      icon: 'pi pi-eye',
+      command: () => this.btnRedirectVisualizar(model.idCita)
+    },
+    {
+      label: 'Subir archivo',
+      icon: 'pi pi-upload',
+      command: () => this.btnOpenModalUpload(model.idCita)
+    }
+  ];
+}
+
+
 }

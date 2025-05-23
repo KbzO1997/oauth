@@ -38,11 +38,6 @@ export const menuConfig: { [key: string]: any[] } = {
               label: 'Tratamientos',
               icon: 'pi pi-fw pi-heart',
               routerLink: ['/doctor-info/man-tratamiento'],
-            },
-            {
-              label: 'cargar',
-              icon: 'pi pi-fw pi-heart',
-              routerLink: ['/informacion-paciente/archivo-info'],
             }
           ],
         },

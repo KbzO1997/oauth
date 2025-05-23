@@ -64,4 +64,11 @@ export class DoctorInfoComponent implements OnInit{
       this.router.navigate(['/personal-info/actualizar-informacion', resp]);
     }});   
   }
+
+  exportarPdf() {
+    const columnas = ['persona.nombres', 'persona.primerApellido', 'persona.segundoApellido', 'persona.cedula', 'username', 'persona.contacto', 'persona.telefono'];
+    const headers = ['Nombres', 'Apellido Paterno', 'Apellido Materno', 'Cédula', 'Usuario', 'Contacto', 'Teléfono'];     
+    this.util.exportarPDF(this.listUsuario, columnas, headers, 'Reporte_Doctores');
+  }
+
 }

@@ -1,69 +1,177 @@
-<style>
-  .p-card {
-  margin-bottom: 20px;
-}
-
-.p-grid {
-  margin-top: 20px;
-}
-
-.p-col-12 p-md-4, .p-col-12 p-md-6 {
-  margin-bottom: 20px;
-}
-</style>
-<div class="p-grid p-fluid">
-  <!-- Tarjetas de KPI -->
-  <div class="p-col-12 p-md-4">
-    <p-card header="Pacientes Activos">
-      <h2>{{ pacientesActivos }}</h2>
-    </p-card>
+<div class="grid">
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Pacientes Activos</span>
+          <div class="text-900 font-medium text-xl">152</div>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center bg-blue-100 border-round"
+          [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+        >
+          <i class="pi pi-users text-blue-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="p-col-12 p-md-4">
-    <p-card header="Citas Programadas">
-      <h2>{{ citasProgramadas }}</h2>
-    </p-card>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Citas Programadas</span>
+          <div class="text-900 font-medium text-xl">200</div>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center bg-orange-100 border-round"
+          [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+        >
+          <i class="pi pi-calendar text-orange-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="p-col-12 p-md-4">
-    <p-card header="Ingresos Totales">
-      <h2>${{ ingresosTotales }}</h2>
-    </p-card>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Ingresos Totales</span>
+          <div class="text-900 font-medium text-xl">2841</div>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+          [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+        >
+          <i class="pi pi-dollar text-cyan-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Tratamientos</span>
+          <div class="text-900 font-medium text-xl">152</div>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center bg-purple-100 border-round"
+          [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+        >
+          <i class="pi pi-face-smile text-purple-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Gráfico de Citas por Especialidad -->
-  <div class="p-col-12 p-md-6">
-    <p-card header="Citas por Especialidad">
-      <p-chart type="pie" [data]="citasPorEspecialidad"></p-chart>
-    </p-card>
+  <div class="col-12 xl:col-12">
+    <div class="card">
+      <div class="flex align-items-center justify-content-between mb-4">
+        <h5>🦷 Notificaciones</h5>
+        <p-button
+  pButton
+  icon="pi pi-chevron-down"
+  class="p-button-rounded p-button-icon-only p-button-text"
+  (click)="isNotification = !isNotification">
+</p-button>
+      </div>
+      <div *ngIf="isNotification">
+        <span class="block text-600 font-medium mb-3">HOY</span>
+        <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+          <li
+            class="flex align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <div
+              class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0"
+            >
+              <i class="pi pi-calendar text-xl text-blue-500"></i>
+            </div>
+            <span class="text-900 line-height-3">
+              Juan Pérez
+              <span class="text-700">
+                asistió a su cita de limpieza dental
+                <span class="text-blue-500">a las 10:00 AM</span>
+              </span>
+            </span>
+          </li>
+
+          <li
+            class="flex align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <div
+              class="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0"
+            >
+              <i class="pi pi-user-plus text-xl text-orange-500"></i>
+            </div>
+            <span class="text-700 line-height-3">
+              Nuevo paciente registrado:
+              <span class="text-blue-500 font-medium">María González</span>
+            </span>
+          </li>
+
+          <li class="flex align-items-center py-2">
+            <div
+              class="w-3rem h-3rem flex align-items-center justify-content-center bg-green-100 border-circle mr-3 flex-shrink-0"
+            >
+              <i class="pi pi-dollar text-xl text-green-500"></i>
+            </div>
+            <span class="text-700 line-height-3">
+              Pago recibido por tratamiento de ortodoncia:
+              <span class="text-blue-500 font-medium">120$</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <!-- Gráfico de Ingresos Mensuales -->
-  <div class="p-col-12 p-md-6">
-    <p-card header="Ingresos Mensuales">
-      <p-chart type="line" [data]="ingresosMensuales"></p-chart>
-    </p-card>
+  <div class="col-12 xl:col-6">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <h5>📅 Pacientes Atendidos.</h5>
+      </div>
+      <p-chart
+        type="line"
+        [data]="patientsChartData"
+        [options]="chartOptions"
+        styleClass="w-full md:w-30rem"
+      ></p-chart>
+    </div>
+
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <h5>🦷📉 Índice de Caries o Enfermedades Bucales Comunes.</h5>
+      </div>
+      <p-chart
+        type="radar"
+        [data]="oralHealthChartData"
+        [options]="chartOptions"
+        styleClass="w-full md:w-30rem"
+      ></p-chart>
+    </div>
   </div>
 
-  <!-- Tabla de Citas -->
-  <div class="p-col-12">
-    <p-card header="Citas Programadas">
-      <p-table [value]="citas" [paginator]="true" [rows]="5">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Paciente</th>
-            <th>Fecha</th>
-            <th>Doctor</th>
-            <th>Especialidad</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-cita>
-          <tr>
-            <td>{{ cita.paciente }}</td>
-            <td>{{ cita.fecha | date: 'short' }}</td>
-            <td>{{ cita.doctor }}</td>
-            <td>{{ cita.especialidad }}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </p-card>
+  <div class="col-12 xl:col-6">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <h5>📅 Citas Programadas vs. Asistidas.</h5>
+      </div>
+      <p-chart
+        type="bar"
+        [data]="appointmentsChartData"
+        [options]="chartOptions"
+        styleClass="w-full md:w-30rem"
+      ></p-chart>
+    </div>
+
+    <div class="card">
+      <h5>📎 Distribución de Tratamientos</h5>
+      <p-chart
+        type="doughnut"
+        [data]="treatmentChartData"
+        [options]="chartOptions"
+        styleClass="w-full md:w-30rem"
+      ></p-chart>
+    </div>
   </div>
 </div>

@@ -46,9 +46,8 @@
 
       <ng-template pTemplate="header">
         <tr class="bg-primary text-white">
-          <th>Cancelar</th>
-          <th>Pagar</th>
-          <th>Examinar</th>
+          <th></th>
+          
           <th>Tratamiento</th>
           <th>Médico</th>
           <th>Paciente</th>
@@ -64,60 +63,19 @@
       <ng-template pTemplate="body" let-model>
         <tr>
           <td class="text-center">
-            <p-button
-              *ngIf="model.estado === 'Asignado' " 
-              icon="pi pi-times"
-              [rounded]="true"
-              [text]="true"
-              [raised]="true"
-              severity="danger"
-              (onClick)="btnEnvEditRequest(model.id_cita)"
-            />
-          </td>
-          <td>
-            <p-button    
-              *ngIf="model.estado === 'Asignado' "          
-              icon="pi pi-paypal"
-              [rounded]="true"
-              [text]="true"
-              [raised]="true"
-              severity="primary"
-              (onClick)="btnRedirectPagar(model.idCita)" 
-            />
-          </td>
-          <td>
-            <p-button    
-              *ngIf="model.estado === 'Asignado' "          
-              icon="pi pi-folder-open"
-              class="mr-2"
-              [rounded]="true"
-              [text]="true"
-              [raised]="true"
-              severity="primary"
-              (onClick)="btnRedirectExaminar(model.idCita)" 
-            />
-            <p-button    
-              *ngIf="model.estado === 'Asignado' "          
-              icon="pi pi-eye"
-             
-              [rounded]="true"
-              [text]="true"
-              [raised]="true"
-              severity="primary"
-              (onClick)="btnRedirectVisualizar(model.idCita)" 
-            />
-          </td>
-          <td>
-            <p-button    
-              *ngIf="model.estado === 'Asignado' "          
-              icon="pi pi-folder-open"
-             
-              [rounded]="true"
-              [text]="true"
-              [raised]="true"
-              severity="primary"
-              (onClick)="btnOpenModalUpload(model.idCita)" 
-            />
+             <p-splitButton
+        *ngIf="model.estado === 'Asignado'"
+        icon="pi pi-cog"
+        label="Acciones"
+        
+          [model]="model.menuItems"
+        [rounded]="true"
+        [text]="true"
+        [raised]="true"
+        appendTo="body"
+        severity="primary"
+      >
+      </p-splitButton>
           </td>
           <td>{{ model.tratamiento.nombre }}</td>
           <td>

@@ -18,6 +18,7 @@ import { OdontogramaService } from '../odontograma.service';
 import { Odontograma, StatusCode, Tooth, Util } from '@oauth/shared-config';
 import { DATOS_INDICE_CPO, DATOS_PIEZAS, ENFERMEDAD_PERIODONTAL, OPTIONS_0_1, OPTIONS_0_3, STATUS_OPTIONS, TOOTH_TYPES } from './odontograma-const';
 import { CardModule } from 'primeng/card';
+import { AccordionModule } from 'primeng/accordion';
 
 /*
 interface Tooth {
@@ -41,7 +42,8 @@ interface Tooth {
     CheckboxModule,
     InputNumberModule,
     RadioButtonModule,
-    CardModule
+    CardModule,
+    AccordionModule
   ],
   templateUrl: './odontograma-info.component.html',
   styleUrl: './odontograma-info.component.css'

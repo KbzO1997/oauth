@@ -5,6 +5,8 @@ import { RsTrxService } from './response';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { StatusCode } from './enum';
+import jsPDF from 'jspdf';
+import autoTable, { UserOptions } from 'jspdf-autotable';
 
 export class Util {
   errorText =
@@ -167,5 +169,41 @@ export class Util {
     sessionStorage.removeItem('photo');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
+  }
+
+  exportarPDF(data: any[], columnas: any[], headers: string[], nombreArchivo: string) {
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text('Listado de registros', 14, 15);
+
+    autoTable(doc, {
+      startY: 20,
+      head: [headers],
+      body: data.map(row => columnas.map(col => this.getNestedValue(row, col))),
+      styles: {
+        fontSize: 10,
+        cellPadding: 3,
+      },
+      headStyles: {
+        fillColor: [41, 128, 185],  // azul oscuro
+        textColor: 255,
+        fontStyle: 'bold'
+      },
+      didDrawPage: (dataArg) => {
+        // 🟩 Número de página al pie
+        const pageSize = doc.internal.pageSize;
+        const pageHeight = pageSize.height || pageSize.getHeight();
+        doc.setFontSize(10);
+        const totalPages = (doc as any).internal.getNumberOfPages();
+        doc.text(`Página ${totalPages}`, dataArg.settings.margin.left, pageHeight - 10);
+      }
+    } as UserOptions);
+
+    doc.save(`${nombreArchivo}.pdf`);
+  }
+
+  getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
   }
 }

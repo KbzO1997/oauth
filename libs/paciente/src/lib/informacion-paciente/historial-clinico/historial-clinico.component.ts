@@ -52,5 +52,17 @@ export class HistorialClinicoComponent implements OnInit{
     } catch (error) {console.log(error);}    
   }
 
+  exportarPdf() {
+    const columnas = ['tratamientoMedico', 'propensoHemorragia', 'alergiaMedica', 'hipertenso', 'diabetico'];
+    const headers = ['Tratamiento Médico', 'Propenso a Hemorragia','Alergias', 'Es Hipertenso', 'Tiene Diabetes'];     
+    const dataTransformada = this.list.map(model => ({
+      tratamientoMedico: model.tratamientoMedico ? 'Sí' : 'No',
+      propensoHemorragia: model.propensoHemorragia ? 'Sí' : 'No',
+      hipertenso: model.hipertenso ? 'Sí' : 'No',
+      diabetico: model.diabetico ? 'Sí' : 'No',
+      alergiaMedica: model.alergiaMedica
+     }));
+    this.util.exportarPDF(dataTransformada, columnas, headers, 'Reporte_Historial_Clinico');
+  }
   
 }
