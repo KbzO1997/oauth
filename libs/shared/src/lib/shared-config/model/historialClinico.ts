@@ -8,6 +8,13 @@ export class HistorialClinico {
     alergiaMedica!: string;
     hipertenso?: boolean;
     diabetico?: boolean;
+    fechaApertura?: string; // Formato ISO: 'YYYY-MM-DD'
+    enfermedadesHereditarias: string;
+    cirujiasPrevias?: boolean;
+    tipoHabito: string;
+    condicionesEmbarazo?: boolean;
+    frecuenciaCepillado: string;
+
     estado?: string;
     paciente!: Paciente;
 
@@ -18,6 +25,9 @@ export class HistorialClinico {
         this.alergiaMedica = '';
         this.hipertenso = false;
         this.diabetico = false;
+        this.enfermedadesHereditarias = '';
+        this.tipoHabito = '';
+        this.frecuenciaCepillado = '';
         this.estado = 'A';
         this.paciente = new Paciente();
     }

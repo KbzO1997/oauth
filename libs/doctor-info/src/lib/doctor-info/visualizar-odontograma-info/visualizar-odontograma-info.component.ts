@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -15,9 +15,10 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { OdontogramaService } from '../odontograma.service';
-import { Odontograma, StatusCode, Tooth, Util } from '@oauth/shared-config';
+import { Odontograma, Tooth, Util } from '@oauth/shared-config';
 import { DATOS_INDICE_CPO, DATOS_PIEZAS, ENFERMEDAD_PERIODONTAL, OPTIONS_0_1, OPTIONS_0_3, STATUS_OPTIONS, TOOTH_TYPES } from '../odontograma-info/odontograma-const';
-
+import { AccordionModule } from 'primeng/accordion';
+import { generarPDF } from './odontograma-repoort.component';
 
 @Component({
   selector: 'app-odontograma-info',
@@ -32,7 +33,8 @@ import { DATOS_INDICE_CPO, DATOS_PIEZAS, ENFERMEDAD_PERIODONTAL, OPTIONS_0_1, OP
     PanelModule,
     CheckboxModule,
     InputNumberModule,
-    RadioButtonModule
+    RadioButtonModule,
+    AccordionModule
   ],
   templateUrl: './visualizar-odontograma-info.component.html',
   styleUrl: './visualizar-odontograma-info.component.css'
@@ -61,6 +63,9 @@ export class VisualizazOdontogramaInfoComponent  implements OnInit {
   itemOclusion    = '';
   itemFluorosis   = '';
   errorText = 'Debes ingresar un número de pieza válido (1-32) antes de agregar una nueva fila.';
+  
+   // Referencia al contenedor que quieres imprimir
+  @ViewChild('pdfTable', { static: false }) pdfTable!: ElementRef;
   
   constructor(private serv: OdontogramaService, private router: Router, private route: ActivatedRoute,) {  }
 
@@ -147,5 +152,9 @@ export class VisualizazOdontogramaInfoComponent  implements OnInit {
     if (value && (isNaN(value) || value < 1 || value > 32)) {
       rowData.pieza = ''; 
     }
+  }
+
+  btnGenerateReport(): void {
+    generarPDF(this.pdfTable);
   }
 }

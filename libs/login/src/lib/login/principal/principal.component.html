@@ -1,0 +1,257 @@
+<div class="patient-home">
+
+<!-- Botones de Login y Registro -->
+  <div class="auth-buttons">
+   <button class="login-btn" (click)="onLogin()">
+    <i class="pi pi-sign-in" style="margin-right: 6px;"></i> Login
+  </button>
+  <button class="register-btn" (click)="btnOpenModal()">
+    <i class="pi pi-user-plus" style="margin-right: 6px;"></i> Registrarse
+  </button>
+  </div>
+
+  <!-- Header Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">🦷 Tu Sonrisa, Nuestra Pasión</h1>
+        <p class="hero-subtitle">
+          Brindamos atención odontológica de calidad con tecnología de
+          vanguardia y un equipo de profesionales comprometidos con tu bienestar
+          dental.
+        </p>
+
+      </div>
+      <div class="hero-image">
+        <img src="./o_general.jpg" alt="icono" class="" />
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <i class="pi pi-star-fill text-yellow-500"></i>
+        <span class="stat-number">4.9/5</span>
+        <span class="stat-label">Calificación</span>
+      </div>
+      <div class="stat-item">
+        <i class="pi pi-users text-blue-500"></i>
+        <span class="stat-number">1000+</span>
+        <span class="stat-label">Pacientes</span>
+      </div>
+      <div class="stat-item">
+        <i class="pi pi-clock text-green-500"></i>
+        <span class="stat-number">5+</span>
+        <span class="stat-label">Años</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">
+        Ofrecemos una amplia gama de tratamientos dentales para toda la familia
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <p-card
+        *ngFor="let service of services"
+        class="service-card"
+        [style]="{ height: '100%' }"
+      >
+        <ng-template pTemplate="header">
+          <div class="service-icon">
+            <img [src]="service.icon" alt="icono" class="rounded-img" />
+          </div>
+        </ng-template>
+        <ng-template pTemplate="title">
+          {{ service.title }}
+        </ng-template>
+        <ng-template pTemplate="content">
+          <p class="service-description">{{ service.description }}</p>
+        </ng-template>
+      </p-card>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section class="location-section">
+    <div class="location-container">
+      <div class="location-info">
+        <h2 class="location-title">
+          <i class="pi pi-map-marker text-primary icono"></i>
+          Nuestra Ubicación
+        </h2>
+        <div class="location-details">
+          <div class="location-item">
+            <i class="pi pi-map text-primary"></i>
+            <div>
+              <strong>Dirección:</strong>
+              <p>
+                Av. Principal #123, Centro Médico Plaza<br />Ciudad, Estado - CP
+                12345
+              </p>
+            </div>
+          </div>
+
+          <div class="location-item">
+            <i class="pi pi-clock text-primary"></i>
+            <div>
+              <strong>Horarios de Atención:</strong>
+              <p>
+                Lunes a Viernes: 8:00 AM - 6:00 PM<br />Sábados: 9:00 AM - 2:00
+                PM
+              </p>
+            </div>
+          </div>
+
+          <div class="location-item">
+            <i class="pi pi-car text-primary"></i>
+            <div>
+              <strong>Estacionamiento:</strong>
+              <p>Disponible sin costo adicional</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="location-map">
+        <div class="map-placeholder">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15948.542459362849!2d-79.94536444262681!3d-2.1012218472891213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902d0d5a68647e53%3A0xb750729f8341f7ee!2sBloque%201B%2C%20Guayaquil!5e0!3m2!1ses-419!2sec!4v1748226599555!5m2!1ses-419!2sec"
+            width="100%"
+            height="300"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <div class="contact-header">
+        <h2 class="contact-title">Contáctanos</h2>
+        <p class="contact-subtitle">
+          Estamos aquí para resolver tus dudas y agendar tu próxima cita
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon phone">
+            <i class="pi pi-phone"></i>
+          </div>
+          <h3>Teléfono</h3>
+          <p class="contact-detail">(55) 1234-5678</p>
+          <p class="contact-description">Llamadas y WhatsApp</p>
+          <p-button
+            label="Llamar Ahora"
+            icon="pi pi-phone"
+            class="p-button-sm contact-button"
+          >
+          </p-button>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon whatsapp">
+            <i class="pi pi-whatsapp"></i>
+          </div>
+          <h3>WhatsApp</h3>
+          <p class="contact-detail">(55) 1234-5678</p>
+          <p class="contact-description">Respuesta inmediata</p>
+          <p-button
+            label="Enviar Mensaje"
+            icon="pi pi-send"
+            class="p-button-sm contact-button"
+            severity="success"
+          >
+          </p-button>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon email">
+            <i class="pi pi-envelope"></i>
+          </div>
+          <h3>Email</h3>
+          <p class="contact-detail">citasclinicadental.com</p>
+          <p class="contact-description">Consultas y dudas</p>
+          <p-button
+            label="Enviar Email"
+            icon="pi pi-envelope"
+            class="p-button-sm contact-button"
+            severity="info"
+          >
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Section -->
+  <section class="emergency-section">
+    <div class="emergency-card">
+      <div class="emergency-content">
+        <div class="emergency-icon">
+          <i class="pi pi-exclamation-triangle icono"></i>
+        </div>
+        <div class="emergency-text">
+          <h3>¿Emergencia Dental?</h3>
+          <p>Atendemos urgencias las 24 horas. No dudes en contactarnos.</p>
+        </div>
+        <div class="emergency-action">
+          <p-button
+            label="línea de Emergencia"
+            icon="pi pi-phone"
+            class="p-button-lg"
+            severity="danger"
+          >
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Clínica Dental</h4>
+        <p>Tu salud dental es nuestra prioridad</p>
+      </div>
+      <div class="footer-section">
+        <h4>Síguenos</h4>
+        <div class="social-links">
+          <i class="pi pi-facebook"></i>
+          <i class="pi pi-instagram"></i>
+          <i class="pi pi-twitter"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<p-dialog
+  [closable]="true"
+  [(visible)]="dialog"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{ width: '45vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+  (onShow)="resetForm()"
+>
+  <ng-template pTemplate="header">
+    <i class="pi pi-user-plus" style="margin-right: 0.5rem"></i>
+    Registrarse al sistema.
+  </ng-template>
+  <app-dialog-registro
+    #registerDialog
+    (registroExitoso)="dialog = false"
+  ></app-dialog-registro>
+</p-dialog>

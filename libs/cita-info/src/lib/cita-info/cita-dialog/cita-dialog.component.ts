@@ -1,4 +1,10 @@
-import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -19,9 +25,12 @@ import { BadgeModule } from 'primeng/badge';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
-import {DoctorService} from '@oauth/doctor-info';
-import {PacienteService} from '@oauth/informacion-paciente';
+import { DoctorService } from '@oauth/doctor-info';
+import { PacienteService } from '@oauth/informacion-paciente';
 import { CitaService } from '../cita.service';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+
 @Component({
   selector: 'app-cita-dialog',
   standalone: true,
@@ -35,12 +44,13 @@ import { CitaService } from '../cita.service';
     DropdownModule,
     BadgeModule,
     ToastModule,
+    TableModule,
+    TooltipModule
   ],
   templateUrl: './cita-dialog.component.html',
   providers: [MessageService],
 })
 export class CitaDialogComponent {
-
   util: Util = new Util();
   model: Cita = new Cita();
   validator: ValidatorForm = new ValidatorForm();
@@ -50,13 +60,14 @@ export class CitaDialogComponent {
   @ViewChild('formulario') formulario!: NgForm;
   @Input() id = 0;
   @Output() registroExitoso = new EventEmitter<void>();
-  
+
   items: Tratamiento[] = [];
   itemsDoc: Doctor[] = [];
+  showModal = false;
 
   itemsEstado = [
     { name: 'Asignado', code: 'Asignado' },
-    { name: 'Atendido', code: 'Atendido' }, 
+    { name: 'Atendido', code: 'Atendido' },
   ];
 
   constructor(
@@ -81,7 +92,7 @@ export class CitaDialogComponent {
       next: (resp) => {
         this.itemsDoc = resp.map((doc: any) => ({
           ...doc,
-          nombreCompleto: `${doc.persona.nombres} ${doc.persona.primerApellido} ${doc.persona.segundoApellido}`
+          nombreCompleto: `${doc.persona.nombres} ${doc.persona.primerApellido} ${doc.persona.segundoApellido}`,
         }));
       },
     });
@@ -104,7 +115,7 @@ export class CitaDialogComponent {
         if (res.status == StatusCode.SUCCESS) {
           setTimeout(() => {
             window.location.reload();
-          }, 3000);          
+          }, 3000);
         }
       },
       (err) => {
@@ -119,24 +130,44 @@ export class CitaDialogComponent {
     this.model.doctor = new Doctor();
     this.model.tratamiento = new Tratamiento();
 
-    this.model.paciente.idPaciente = this.model.id_paciente; 
+    this.model.paciente.idPaciente = this.model.id_paciente;
     this.model.doctor.idDoctor = this.model.id_doctor;
     this.model.tratamiento.idTratamiento = this.model.id_tratamiento;
   }
   btnEnvConsult(): void {
-    this.serv_p.envConsultTransactionIdPersonPaciente(this.cedulaBuscada).subscribe({
-      next: (resp) => {
-        this.nombrePaciente = resp.persona.nombres + ' ' + resp.persona.primerApellido + ' ' + resp.persona.segundoApellido; 
-        this.model.id_paciente = resp.idPaciente; 
-      },
-      error: (err) => {
-        this.nombrePaciente = err.error?.message; 
-      }
-    });
+    this.serv_p
+      .envConsultTransactionIdPersonPaciente(this.cedulaBuscada)
+      .subscribe({
+        next: (resp) => {
+          this.nombrePaciente =
+            resp.persona.nombres +
+            ' ' +
+            resp.persona.primerApellido +
+            ' ' +
+            resp.persona.segundoApellido;
+          this.model.id_paciente = resp.idPaciente;
+        },
+        error: (err) => {
+          this.nombrePaciente = err.error?.message;
+        },
+      });
+  }
+
+  selectedTratamiento = null;
+
+  onSelectTratamiento(tratamiento: any) {
+    this.model.id_tratamiento = tratamiento.idTratamiento;
+    this.showModal = false;
+    this.onMethodChange(tratamiento.idTratamiento); 
+  }
+
+  getTratamientoNombre(id: number): string {
+    const item = this.items.find((t) => t.idTratamiento === id);
+    return item ? item.nombre : '';
   }
 
   onMethodChange(id: number) {
-    const model = this.items.find(p => p.idTratamiento === id);
+    const model = this.items.find((p) => p.idTratamiento === id);
     this.model.costo = model?.costo;
   }
 }

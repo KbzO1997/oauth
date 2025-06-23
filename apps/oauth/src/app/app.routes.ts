@@ -5,7 +5,7 @@ import {
   ConsultarPersonasComponent,
   PersonalInfoComponent,
 } from '@oauth/personal-info';
-import { LoginComponent } from '@oauth/login';
+import { LoginComponent, PrincipalComponent } from '@oauth/login';
 import {
   DashboardMlComponent,
   DashboardMlRhComponent,
@@ -35,11 +35,15 @@ import {
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: LoginComponent,
+    component: PrincipalComponent, //LoginComponent,
   },
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'principal',
+    component: PrincipalComponent,
   },
   {
     path: 'personal-info',
@@ -70,7 +74,7 @@ export const appRoutes: Route[] = [
       { path: 'registrar-paciente/:id', component: RegistrarPacienteComponent },
       { path: 'historial-info', component: HistorialInfoComponent },
       { path: 'historial-clinico', component: HistorialClinicoComponent },
-      { path: 'archivo-info', component: ArchivoInfoComponent },
+      { path: 'archivo-info', component: ArchivoInfoComponent }
     ],
   },
   {

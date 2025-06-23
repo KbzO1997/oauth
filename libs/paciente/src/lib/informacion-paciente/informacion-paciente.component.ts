@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
 import { HistorialInfoComponent } from './historial-info/historial-info.component';
 import { ConsultarHistorialInfoComponent } from './consultar-historial-info/consultar-historial-info.component';
+import { RegistrarPacienteComponent } from './registrar-paciente/registrar-paciente.component';
 
 @Component({
   selector: 'app-informacion-paciente',
@@ -19,7 +20,8 @@ import { ConsultarHistorialInfoComponent } from './consultar-historial-info/cons
     InputTextModule,
     DialogModule,
     HistorialInfoComponent,
-    ConsultarHistorialInfoComponent
+    ConsultarHistorialInfoComponent,
+    RegistrarPacienteComponent
   ],
   templateUrl: './informacion-paciente.component.html'
 })
@@ -31,7 +33,11 @@ export class InformacionPacienteComponent implements OnInit{
   dialog = false;
   id!: number;
   modo = '';
+  
   @ViewChild('registerDialog') registerDialog!: HistorialInfoComponent;
+
+  dialogPerson = false;
+  @ViewChild('registerPersonDialog') registerPersonDialog!: RegistrarPacienteComponent;
   
   constructor(private serv: PacienteService, private router: Router) {  }
 
@@ -73,4 +79,15 @@ export class InformacionPacienteComponent implements OnInit{
     const headers = ['Nombres', 'Apellido Paterno', 'Apellido Materno', 'Cédula', 'Teléfono', 'E-Mail', 'Contacto',];     
     this.util.exportarPDF(this.list, columnas, headers, 'Reporte_Pacientes');
   }
+
+  btnOpenModalPerson(){   
+    this.dialogPerson = true;
+  }
+
+  resetForm() {
+    if (this.dialogPerson) {
+      this.registerPersonDialog.resetForm();
+    }
+  }
+  
 }

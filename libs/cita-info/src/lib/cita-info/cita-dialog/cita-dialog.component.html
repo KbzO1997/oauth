@@ -1,19 +1,24 @@
 <form #formulario="ngForm" class="card p-fluid mt-2" autocomplete="off">
   <div class="p-formgrid grid">
-    <div class="field col">
-      <p-dropdown
-        [options]="items"
-        optionLabel="nombre"
-        optionValue="idTratamiento"
-        [(ngModel)]="model.id_tratamiento"
+    <div *ngIf="model.id_tratamiento" class="field col-4 pt-2">
+      <input
+        pInputText
+        [value]="getTratamientoNombre(model.id_tratamiento)"
+        type="text"
         placeholder="Seleccione Tratamiento"
-        required
-        #idTratamiento="ngModel"
-        [style]="{ display: 'flex' }"
-        appendTo="body"
-        [ngModelOptions]="{ standalone: true }"
-        (onChange)="onMethodChange($event.value)"
-      ></p-dropdown>
+        readonly
+      />
+    </div>
+    <div class="field col-2">
+      <p-button
+        icon="pi pi-search"
+        [rounded]="true"
+        severity="info"
+        type="button"
+        (click)="showModal = true"
+        pTooltip="Buscar tratamiento"
+        tooltipPosition="right"
+      />
     </div>
 
     <div class="field col">
@@ -111,7 +116,7 @@
 
   <div class="p-formgrid grid">
     <div class="field col">
-      <label  for="name1">Estado</label>
+      <label for="name1">Estado</label>
       <p-dropdown
         [options]="itemsEstado"
         optionLabel="name"
@@ -136,10 +141,8 @@
         disabled="true"
       />
     </div>
-
-    
   </div>
-  <div class="flex justify-content-center">      
+  <div class="flex justify-content-center">
     <p-button
       icon="pi pi-check"
       [rounded]="true"
@@ -149,3 +152,32 @@
     />
   </div>
 </form>
+
+<p-dialog
+  header="Seleccione un tratamiento"
+  [(visible)]="showModal"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [closable]="true"
+>
+  <p-table
+    [value]="items"
+    selectionMode="single"
+    [(selection)]="selectedTratamiento"
+    (onRowSelect)="onSelectTratamiento($event.data)"
+    dataKey="idTratamiento"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Costo</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tratamiento>
+      <tr [pSelectableRow]="tratamiento">
+        <td>{{ tratamiento.nombre }}</td>
+        <td>{{ tratamiento.costo }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

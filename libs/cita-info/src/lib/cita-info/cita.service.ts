@@ -19,6 +19,10 @@ export class CitaService {
   envConsultTransaction():Observable<Cita[]>{
     return this.httpService.get<Cita[]>(`${this.endPoint}cita/consult`);
   }
+
+  envConsultNotificacionTransaction(id:number):Observable<Cita[]>{
+    return this.httpService.get<Cita[]>(`${this.endPoint}cita/consultNotificacionDoctorId/${id}`);
+  }
   
   envConsultTransactionId(id:number):Observable<Cita>{
     return this.httpService.get<Cita>(`${this.endPoint}cita/consultId/${id}`);

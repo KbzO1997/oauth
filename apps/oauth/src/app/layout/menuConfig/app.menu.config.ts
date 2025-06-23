@@ -28,6 +28,11 @@ export const menuConfig: { [key: string]: any[] } = {
               icon: 'pi pi-fw pi-users',
               routerLink: ['/doctor-info'],
             },
+            {
+              label: 'Citas',
+              icon: 'pi pi-fw pi-calendar-plus',
+              routerLink: ['/cita-info'],
+            }
           ],
         },
         {
@@ -109,7 +114,7 @@ export const menuConfig: { [key: string]: any[] } = {
               routerLink: ['/cita-info/historial-cita'],
             },
             {
-              label: 'Historial Clínico',
+              label: 'Apertura Ficha Médica',
               icon: 'pi pi-fw pi-history',
               routerLink: ['/informacion-paciente/historial-clinico'],
             }

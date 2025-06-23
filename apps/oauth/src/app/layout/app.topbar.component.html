@@ -13,6 +13,27 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+         <button class="p-link layout-topbar-button relative" (click)="overlayPanel.toggle($event)">
+        <i class="pi pi-bell"></i>
+        <p-badge [value]="citasHoy.length" severity="danger" *ngIf="citasHoy.length > 0" class="p-overlay-badge"></p-badge>
+        <span>Notificaciones</span>
+    </button>
+
+    <p-overlayPanel #overlayPanel [showCloseIcon]="true" [dismissable]="true" styleClass="p-3 w-64">
+        <h4 class="mb-2">Citas de Hoy</h4>
+        <ng-container *ngIf="citasHoy.length > 0; else sinCitas">
+            <ul class="list-none p-0 m-0">
+                <li *ngFor="let cita of citasHoy" class="mb-2 border-bottom pb-1">
+                    <strong>{{ cita.paciente.persona.nombres }}</strong><br>
+                    {{ cita.hora | date:'shortTime' }} - {{ cita.tratamiento.nombre }}
+                </li>
+            </ul>
+        </ng-container>
+        <ng-template #sinCitas>
+            <p>No hay citas agendadas hoy.</p>
+        </ng-template>
+    </p-overlayPanel>
+
         <button class="p-link layout-topbar-button" (click)="btnProfilePerson()">
             <i class="pi pi-user"></i>
             <span>Profile</span>

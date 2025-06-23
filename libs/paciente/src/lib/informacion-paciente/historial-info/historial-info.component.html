@@ -69,7 +69,41 @@
     </div>
 
     <div class="p-formgrid grid">
+        <div class="field col">
+        <label for="condicionesEmbarazo">Condiciones Embarazo?</label>
+        <p-dropdown
+          [options]="items"
+          optionLabel="code"
+          optionValue="name"
+          [(ngModel)]="model.condicionesEmbarazo"
+          placeholder="Seleccione"
+          required
+          #condicionesEmbarazo="ngModel"
+          [style]="{ display: 'flex' }"
+          appendTo="body"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-dropdown>
+      </div>
+
       <div class="field col">
+        <label for="cirujiasPrevias">Cirujias Previas?</label>
+        <p-dropdown
+          [options]="items"
+          optionLabel="code"
+          optionValue="name"
+          [(ngModel)]="model.cirujiasPrevias"
+          placeholder="Seleccione"
+          required
+          #cirujiasPrevias="ngModel"
+          [style]="{ display: 'flex' }"
+          appendTo="body"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <div class="p-formgrid grid">
+       <div class="field col">
         <label for="alergiaMedica">Alérgico a algún medícamento?</label>
         <textarea
           rows="3"
@@ -86,6 +120,64 @@
           class="p-error"
         >
           Alergia es requerido.
+        </div>
+      </div>
+
+      <div class="field col">
+        <label for="enfermedadesHereditarias">Enfermedades Hereditarias?</label>
+        <textarea
+          rows="3"
+          cols="10"
+          [(ngModel)]="model.enfermedadesHereditarias"
+          name="enfermedadesHereditarias"
+          placeholder="Enfermedades Hereditarias"
+          pInputTextarea
+          required
+          #enfermedadesHereditarias="ngModel"
+        ></textarea>
+        <div
+          *ngIf="enfermedadesHereditarias.invalid && enfermedadesHereditarias.touched"
+          class="p-error"
+        >
+          Enfermedad es requerido.
+        </div>
+      </div>
+    </div>
+
+    <div class="p-formgrid grid">
+      <div class="field col">
+        <label for="frecuenciaCepillado">Frecuencia de Cepillado?</label>
+        <p-dropdown
+          [options]="frecuencia"
+          optionLabel="name"
+          optionValue="name"
+          [(ngModel)]="model.frecuenciaCepillado"
+          placeholder="Seleccione"
+          required
+          #frecuenciaCepillado="ngModel"
+          [style]="{ display: 'flex' }"
+          appendTo="body"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-dropdown>
+      </div>
+
+      <div class="field col">
+        <label for="tipoHabito">Tipo de Hábito?</label>
+        <textarea
+          rows="3"
+          cols="10"
+          [(ngModel)]="model.tipoHabito"
+          name="tipoHabito"
+          placeholder="Tipo de Hábito"
+          pInputTextarea
+          required
+          #tipoHabito="ngModel"
+        ></textarea>
+        <div
+          *ngIf="tipoHabito.invalid && tipoHabito.touched"
+          class="p-error"
+        >
+          Hábito es requerido.
         </div>
       </div>
     </div>

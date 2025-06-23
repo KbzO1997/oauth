@@ -69,11 +69,12 @@
       <div class="flex align-items-center justify-content-between mb-4">
         <h5>🦷 Notificaciones</h5>
         <p-button
-  pButton
-  icon="pi pi-chevron-down"
-  class="p-button-rounded p-button-icon-only p-button-text"
-  (click)="isNotification = !isNotification">
-</p-button>
+          pButton
+          icon="pi pi-chevron-down"
+          class="p-button-rounded p-button-icon-only p-button-text"
+          (click)="isNotification = !isNotification"
+        >
+        </p-button>
       </div>
       <div *ngIf="isNotification">
         <span class="block text-600 font-medium mb-3">HOY</span>
@@ -125,7 +126,7 @@
     </div>
   </div>
 
-  <div class="col-12 xl:col-6">
+  <div class="col-12 xl:col-12">
     <div class="card">
       <div class="flex justify-content-between align-items-center mb-5">
         <h5>📅 Pacientes Atendidos.</h5>
@@ -151,7 +152,7 @@
     </div>
   </div>
 
-  <div class="col-12 xl:col-6">
+  <div class="col-12 xl:col-12">
     <div class="card">
       <div class="flex justify-content-between align-items-center mb-5">
         <h5>📅 Citas Programadas vs. Asistidas.</h5>

@@ -98,7 +98,7 @@ export class LoginComponent {
         route = '/cita-info/calendario-info';
         break;
       case 'PACIENTE':
-        route = '/informacion-paciente';
+        route = '/cita-info/historial-cita';
         break;
       default:
         route = '/'; 

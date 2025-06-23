@@ -1,9 +1,20 @@
-
+<div #pdfTable>
 <!-- dental-diagram.component.html -->
 <div class="dental-diagram-container card">
   <div class="p-grid">
-    <div class="col-12 xl:col-12">
-      <h2>Odontograma Dental</h2>
+     <div class="flex justify-content-between align-items-center mb-3">
+    <h2 class="m-0">Odontograma Dental</h2>    
+    <p-button
+              class="mr-2"
+              icon="pi pi-file-pdf"
+              [rounded]="true"
+              [text]="true"
+              [raised]="true"
+              severity="danger"
+              (onClick)="btnGenerateReport()"
+            />
+  </div>
+    <div class="col-12 xl:col-12">     
 
       <!-- Descripción de tipos de dientes superiores -->
       <div class="teeth-types">
@@ -18,11 +29,7 @@
 
       <!-- Dientes superiores -->
       <div class="teeth-row upper-teeth mb-7">
-        <div
-          *ngFor="let tooth of upperTeeth"
-          [ngClass]="getToothClass(tooth)"
-          
-        >
+        <div *ngFor="let tooth of upperTeeth" [ngClass]="getToothClass(tooth)">
           <div class="tooth-crown"></div>
           <div class="tooth-root"></div>
           <span class="tooth-id">{{ tooth.id_tooth }}</span>
@@ -31,11 +38,7 @@
 
       <!-- Dientes inferiores -->
       <div class="teeth-row lower-teeth">
-        <div
-          *ngFor="let tooth of lowerTeeth"
-          [ngClass]="getToothClass(tooth)"
-          
-        >
+        <div *ngFor="let tooth of lowerTeeth" [ngClass]="getToothClass(tooth)">
           <div class="tooth-root"></div>
           <div class="tooth-crown"></div>
           <span class="tooth-id">{{ tooth.id_tooth }}</span>
@@ -52,9 +55,6 @@
         <span class="type-label premolar-label">Premolares</span>
         <span class="type-label molar-label">Molares</span>
       </div>
-
-      
-
     </div>
   </div>
 
@@ -72,7 +72,9 @@
       <div class="p-formgrid grid">
         <div class="field col">
           <p>Diente:</p>
-          <p>#{{ selectedTooth.id_tooth }} - {{ selectedTooth.tipo | titlecase }}</p>
+          <p>
+            #{{ selectedTooth.id_tooth }} - {{ selectedTooth.tipo | titlecase }}
+          </p>
         </div>
 
         <div class="field col">
@@ -125,9 +127,7 @@
           <th colspan="3">HIGIENE ORAL SIMPLIFICADA</th>
         </tr>
         <tr>
-          <th class="text-center">
-            
-          </th>
+          <th class="text-center"></th>
           <th>PLACA<br />(0-1-2-3)</th>
           <th>CÁLCULO<br />(0-1-2-3)</th>
           <th>GINGIVITIS<br />(0-1)</th>
@@ -156,7 +156,7 @@
   <!-- Tabla Enfermedad Periodontal -->
   <div class="col-6">
     <p-table
-      styleClass="p-datatable-gridlines" 
+      styleClass="p-datatable-gridlines"
       [value]="enfermedadPeriodontal"
       class="tabla-enfermedad"
       responsiveLayout="scroll"
@@ -217,56 +217,43 @@
     </p-table>
 
     <!-- Tabla de índices CPO-ceo -->
-    <div class="indices_CPO-ceo">
-      <p-table
-        styleClass="p-datatable-gridlines" 
-        [value]="datosIndiceCPO"
-        class="tabla-indice"
-        responsiveLayout="scroll"
-      >
-        <ng-template pTemplate="header">
-          <tr>
-            <th colspan="5" class="titulo-tabla">ÍNDICES CPO-ceo</th>
-          </tr>
-          <tr>
-            <th></th>
-            <th>C</th>
-            <th>P</th>
-            <th>O</th>
-            <th>TOTAL</th>
-          </tr>
-        </ng-template>
+    <div class="indices_CPO-ceo mt-2">
+      <p-accordion [multiple]="true">
+        <p-accordionTab header="1. Placa">
+          <p>
+            Es la suciedad que se forma en los dientes (restos de comida,
+            bacterias).
+          </p>
+          <ul>
+            <li><strong>0:</strong> No hay placa visible.</li>
+            <li><strong>1:</strong> Hay muy poca placa (poca acumulación).</li>
+            <li><strong>2:</strong> Hay placa moderada (se ve fácilmente).</li>
+            <li><strong>3:</strong> Hay mucha placa (dientes muy sucios).</li>
+          </ul>
+        </p-accordionTab>
 
-        <ng-template pTemplate="body" let-rowData>
-          <tr>
-            <td>{{ rowData.tipo }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </ng-template>
+        <p-accordionTab header="2. Cálculo">
+          <p>Es el sarro endurecido que se forma si no se limpia la placa.</p>
+          <ul>
+            <li><strong>0:</strong> No hay cálculo.</li>
+            <li><strong>1:</strong> Cálculo muy pequeño.</li>
+            <li><strong>2:</strong> Cálculo moderado.</li>
+            <li><strong>3:</strong> Cálculo severo (mucho sarro).</li>
+          </ul>
+        </p-accordionTab>
 
-        <ng-template pTemplate="footer">
-          <tr>
-            <th></th>
-            <th>c</th>
-            <th>e</th>
-            <th>o</th>
-            <th>TOTAL</th>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-rowData>
-          <tr>
-            <td>{{ rowData.tipoMin }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </ng-template>
-      </p-table>
+        <p-accordionTab header="3. Gingivitis">
+          <p>Es la inflamación de las encías (enrojecimiento, sangrado).</p>
+          <ul>
+            <li><strong>0:</strong> No hay gingivitis (encías normales).</li>
+            <li>
+              <strong>1:</strong> Sí hay gingivitis (encías inflamadas o
+              sangrantes).
+            </li>
+          </ul>
+        </p-accordionTab>
+      </p-accordion>
     </div>
   </div>
+</div>
 </div>

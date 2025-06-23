@@ -38,6 +38,18 @@ export class HistorialInfoComponent{ //implements OnInit{
     { name: true, code: 'Si' },
     { name: false, code: 'No' }
   ];
+
+  frecuencia = [
+    { name: 'Una vez al día'},
+    { name: 'Dos veces al día'},
+    { name: 'Tres veces al día'},
+    { name: 'Después de cada comida'},
+    { name: 'Solo en la mañana'},
+    { name: 'Solo en la noche'},
+    { name: 'Menos de una vez al día'},
+    { name: 'No se cepilla'},
+  ];
+
   constructor(private serv: HistorialService, private router: Router) {  }
 
   btnEnvRequest(): void {   

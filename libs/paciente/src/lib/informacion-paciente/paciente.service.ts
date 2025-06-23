@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment, HttpUtil, RsTrxService, Paciente } from '@oauth/shared-config';
+import { environment, HttpUtil, RsTrxService, Paciente, Usuario } from '@oauth/shared-config';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +28,19 @@ export class PacienteService {
     return this.httpService.get<number>(`${this.endPoint}personuser/consultPersonIdPersona/${id}`);
   }  
     
-  envRegistarTransaction(modelo:Paciente):Observable<RsTrxService>{
+  /*envRegistarTransaction(modelo:Paciente):Observable<RsTrxService>{
     return this.httpService.post<RsTrxService>(`${this.endPoint}paciente/register`, modelo);
   }
 
   envActualizarTransaction(modelo:Paciente):Observable<RsTrxService>{
     return this.httpService.put<RsTrxService>(`${this.endPoint}paciente/update`, modelo);
+  }*/
+
+    envRegistarTransaction(modelo:Usuario):Observable<RsTrxService>{
+    return this.httpService.post<RsTrxService>(`${this.endPoint}personuser/registerUser`, modelo);
+  }
+
+  envActualizarTransaction(modelo:Usuario):Observable<RsTrxService>{
+    return this.httpService.put<RsTrxService>(`${this.endPoint}personuser/updateUser`, modelo);
   }
 }

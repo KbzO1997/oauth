@@ -28,6 +28,6 @@ export class SensorTokenComponent implements OnInit {
 
     redirectToLogin() {
         this.sessionService.hideDialog();
-        window.location.href = '/login';
+        window.location.href = '/principal';
     }
 }
