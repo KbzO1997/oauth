@@ -85,16 +85,16 @@
               (onClick)="btnRedirectVisualizar(model.idCita)" 
             />
           </td>
-          <td>{{ model.tratamiento.nombre }}</td>
+          <td>{{ model.tratamiento?.nombre }}</td>
           <td>
-            {{ model.doctor.persona.nombres }}
-            {{ model.doctor.persona.primerApellido }}
-            {{ model.doctor.persona.segundoApellido }}
+            {{ model.doctor?.persona?.nombres }}
+            {{ model.doctor?.persona?.primerApellido }}
+            {{ model.doctor?.persona?.segundoApellido }}
           </td>
           <td>
-            {{ model.paciente.persona.nombres }}
-            {{ model.paciente.persona.primerApellido }}
-            {{ model.paciente.persona.segundoApellido }}
+            {{ model.paciente?.persona?.nombres }}
+            {{ model.paciente?.persona?.primerApellido }}
+            {{ model.paciente?.persona?.segundoApellido }}
           </td>
 
           <td>{{ model.fecha }}</td>

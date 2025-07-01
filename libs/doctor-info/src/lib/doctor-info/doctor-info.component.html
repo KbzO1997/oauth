@@ -81,14 +81,14 @@
               (onClick)="btnOpenModal(model.persona.id)"              
             />
           </td>
-          <td>{{ model.persona.nombres }}</td>
+          <td>{{ model.persona?.nombres }}</td>
           <td>
-            {{ model.persona.primerApellido }}
-            {{ model.persona.segundoApellido }}
+            {{ model.persona?.primerApellido }}
+            {{ model.persona?.segundoApellido }}
           </td>
-          <td>{{ model.persona.cedula }}</td>
+          <td>{{ model.persona?.cedula }}</td>
           <td>{{ model.username }}</td>
-          <td>{{ model.persona.contacto }}</td>
+          <td>{{ model.persona?.contacto }}</td>
         </tr>
       </ng-template>
     </p-table>

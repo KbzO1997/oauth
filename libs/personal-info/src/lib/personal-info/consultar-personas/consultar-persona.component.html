@@ -88,14 +88,14 @@
               (onClick)="btnEnvEditRequest(model.id)"
             />
           </td>
-          <td>{{ model.persona.nombres }}</td>
+          <td>{{ model.persona?.nombres }}</td>
           <td>
-            {{ model.persona.primerApellido }}
-            {{ model.persona.segundoApellido }}
+            {{ model.persona?.primerApellido }}
+            {{ model.persona?.segundoApellido }}
           </td>
-          <td>{{ model.persona.cedula }}</td>
+          <td>{{ model.persona?.cedula }}</td>
           <td>{{ model.username }}</td>
-          <td>{{ model.persona.contacto }}</td>
+          <td>{{ model.persona?.contacto }}</td>
           <td>{{ model.rol }}</td>
           <td class="text-center">
             <span [class]="'customer-badge status-' + model.estado">
